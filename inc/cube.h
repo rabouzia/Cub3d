@@ -1,6 +1,7 @@
 #ifndef CUBE_H
 # define CUBE_H
 
+# include "../minilibx-linux/mlx.h"
 # include <X11/keysym.h>
 # include <limits.h>
 # include <math.h>
@@ -25,8 +26,11 @@ typedef struct s_pos
 
 typedef struct s_game
 {
+	char 			**map;
 	struct s_pos	*pos;
 	char			**av;
+	void 			*mlx;
+	void 			*win;
 }					t_game;
 
 #endif

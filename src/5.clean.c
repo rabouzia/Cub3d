@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/03 20:21:18 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/10/03 20:36:57 by rabouzia         ###   ########.fr       */
+/*   Created: 2024/10/04 10:57:29 by ramzerk           #+#    #+#             */
+/*   Updated: 2024/10/04 10:58:36 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-int	main(int ac, char **av)
+void clean(t_game *game)
 {
-	t_game	game;
+	return;	
+}
 
-	fill_struct(&game);
-	if (!parsing(game))
-		return (0);
-	if (!minilib())
-		return (0);
-	if (raycasting())
-		return (0);
+
+int	quit_click(t_game *d)
+{
+	free_img(d);
+	if (d->win)
+		mlx_destroy_window(d->mlx, d->win);
+	if (d->mlx)
+	{
+		mlx_destroy_display((*d).mlx);
+		free((*d).mlx);
+	}
+	// free_map(d->map);
+	exit(1);
+	return (0);
 }

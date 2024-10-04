@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/03 20:29:06 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/10/03 20:30:27 by rabouzia         ###   ########.fr       */
+/*   Created: 2024/10/04 10:34:44 by ramzerk           #+#    #+#             */
+/*   Updated: 2024/10/04 10:44:44 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "cube.h"
 
-bool parsing(t_game *game)
+bool raycasting(t_game *game)
 {
-		
+	
 }
+
