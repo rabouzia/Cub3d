@@ -3,6 +3,7 @@
 
 # include "../minilibx-linux/mlx.h"
 # include <X11/keysym.h>
+# include <fcntl.h>
 # include <limits.h>
 # include <math.h>
 # include <stdbool.h>
@@ -26,11 +27,30 @@ typedef struct s_pos
 
 typedef struct s_game
 {
-	char 			**map;
-	struct s_pos	*pos;
+	char			**map;
+	struct s_pos	pos;
+	int				fd;
 	char			**av;
-	void 			*mlx;
-	void 			*win;
+	void			*mlx;
+	void			*win;
 }					t_game;
+
+//############ parsing ###############
+
+bool				parsing(t_game *game);
+
+int					letter_check(t_game *m);
+
+//############ minilib ################
+
+bool				minilibx(t_game *game);
+
+//############ raycasting #############
+
+bool				raycasting(t_game *game);
+
+//############ mini_libft #############
+
+char				*ft_strdup(char *str);
 
 #endif

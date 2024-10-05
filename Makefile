@@ -1,8 +1,15 @@
-SRC_FILES	=	main.c 							\
+SRC_FILES	=	1.main.c 					\
+				2.minilibx.c				\
+				3.raycasting.c 				\
+				4.clean.c 					\
+				5.libft_portable.c 			\
+				parsing/1.parsing.c 		\
+				parsing/2.check_letter.c	\
+				parsing/3.check_format.c	
 
 
 
-CFLAGS 		=	-Wall -Wextra -Werror
+CFLAGS 		=	-Wall -Wextra -Werror -g3
 NAME		=	cube
 NAME_MAC	=	cube_MAC
 LIBX		=	minilibx-linux/libmlx_Linux.a
