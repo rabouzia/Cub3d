@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:21:18 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/10/05 16:12:12 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/10/05 18:39:53 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,17 @@ void	fill_struct(t_game *game, char **av)
 
 int	input(int key, t_game *data)
 {
-	int	n;
-
-	n = 0;
 	if (key == XK_Escape)
 		quit_esc(data);
 	if (key == RIGHT)
-		// n = manage_right_left(data, 1);
+		return (1);
 	if (key == LEFT)
-		n = manage_right_left(data, 0);
+		return (1);
 	if (key == UP)
-		n = manage_up_down(data, 1);
+		return (1);
 	if (key == DOWN)
-		n = manage_up_down(data, 0);
-	if (n)
-		init_img(data);
-	step_counter(data);
-	return (1); 
+		return (1);
+	return (1);
 }
 
 int	quit_click(t_game *d)
@@ -51,6 +45,22 @@ int	quit_click(t_game *d)
 	free_map(d->map);
 	exit(1);
 	return (0);
+}
+
+void	quit_esc(t_game *d)
+{
+	if (d)
+		loop_imgcheck(d);
+	if (d->win)
+		mlx_destroy_window(d->mlx, d->win);
+	if (d->mlx)
+	{
+		mlx_destroy_display((*d).mlx);
+		free((*d).mlx);
+	}
+	if (d->map)
+		free_map(d->map);
+	exit(1);
 }
 
 int	main(int ac, char **av)
