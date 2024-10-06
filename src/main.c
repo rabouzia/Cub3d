@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   1.main.c                                           :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:21:18 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/10/06 02:10:28 by ramzerk          ###   ########.fr       */
+/*   Updated: 2024/10/06 10:20:36 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int	main(int ac, char **av)
 	fill_struct(&game, av);
 	if (!parsing(&game))
 		return (0);
+	printf("%s", game.map[1]);
+	return 1;
 	if (!minilibx(&game))
 		return (0);
 	if (raycasting(&game))

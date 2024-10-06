@@ -18,6 +18,8 @@
 # define DOWN 119
 # define LEFT 97
 # define RIGHT 100
+# define BUFFER_SIZE 10
+# define FILE_DESCRIPTORS 256
 
 typedef struct s_pos
 {
@@ -47,7 +49,6 @@ int					is_good(char c, int i, int j, t_game *game);
 
 bool				find_direction(char c, int i, int j, t_game *game);
 
-int					ft_strstr(char *str, char *to_find);
 
 
 //############ minilibx #####################
@@ -63,6 +64,20 @@ bool				raycasting(t_game *game);
 //############ mini_libft ###################
 
 char				*ft_strdup(char *str);
+
+int					ft_strstr(char *str, char *to_find);
+
+int 				ft_strlen(char *str);
+
+int					ft_strlcpy(char *dest, char *src, int len);
+
+char				*ft_strjoin(char  *s1, char  *s2);
+
+void				ft_putstr_fd(char *s, int fd);
+
+char				*get_next_line(int fd);
+
+void				*ft_calloc(size_t n, size_t s);
 
 //############ clean ########################
 
