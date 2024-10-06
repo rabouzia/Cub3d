@@ -35,22 +35,40 @@ typedef struct s_game
 	void			*win;
 }					t_game;
 
-//############ parsing ###############
+//############ parsing ####################
 
 bool				parsing(t_game *game);
 
+int					read_cub(t_game *data);
+
 int					letter_check(t_game *m);
 
-//############ minilib ################
+int					is_good(char c, int i, int j, t_game *game);
+
+bool				find_direction(char c, int i, int j, t_game *game);
+
+int					ft_strstr(char *str, char *to_find);
+
+
+//############ minilibx #####################
+
+bool				win_create(t_game *game);
 
 bool				minilibx(t_game *game);
 
-//############ raycasting #############
+//############ raycasting ##################
 
 bool				raycasting(t_game *game);
 
-//############ mini_libft #############
+//############ mini_libft ###################
 
 char				*ft_strdup(char *str);
+
+//############ clean ########################
+
+int					quit_click(t_game *d);
+
+void				quit_esc(t_game *d);
+
 
 #endif

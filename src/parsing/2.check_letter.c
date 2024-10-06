@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   2.check_letter.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 15:46:19 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/10/05 16:07:01 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/10/06 02:20:54 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ int	is_good(char c, int i, int j, t_game *game)
 		return (1);
 	if (c == '0')
 		return (1);
-	if (!find_direction(c, i, j, game))
-		return (0);
+	if (find_direction(c, i, j, game))
+		return (1);
+	return 0;
+	
 }
 
 bool	find_direction(char c, int i, int j, t_game *game)

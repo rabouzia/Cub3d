@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   3.check_format.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 15:50:18 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/10/05 16:10:38 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/10/06 02:18:58 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,17 @@ int	nb_ligne(char *file)
 	return (i);
 }
 
-int	read_cub(t_game *data, char *ber)
+int	read_cub(t_game *data)
 {
 	int		i;
 	int		j;
 	char	*line;
 
-	if (!check_extension(ber))
+	if (!check_extension(data->av[2]))
 		return (ft_putstr_fd("Error\nWrong file extension\n", 1), 0);
 	i = 0;
-	j = nb_ligne(ber);
-	data->fd = open(ber, O_RDONLY, 0664);
+	j = nb_ligne(data->av[2]);
+	data->fd = open(data->av[2], O_RDONLY, 0664);
 	data->map = ft_calloc(j + 1, sizeof(char *));
 	while (1)
 	{

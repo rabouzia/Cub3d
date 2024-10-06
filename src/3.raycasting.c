@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   3.raycasting.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 10:34:44 by ramzerk           #+#    #+#             */
-/*   Updated: 2024/10/05 16:09:41 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/10/06 02:11:26 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 bool	raycasting(t_game *game)
 {
+	(void) game;
 	return (1);
 }
