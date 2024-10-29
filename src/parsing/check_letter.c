@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   2.check_letter.c                                   :+:      :+:    :+:   */
+/*   check_letter.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 15:46:19 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/10/06 02:20:54 by ramzerk          ###   ########.fr       */
+/*   Updated: 2024/10/30 00:43:07 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ int	letter_check(t_game *map)
 	int	j;
 
 	i = 0;
-	while (map->map[i])
+	while (map->av[i])
 	{
 		j = 0;
-		while (map->map[i][j])
+		while (map->av[i][j])
 		{
-			if (!is_good(map->map[i][j], i, j, map))
+			if (!is_good(map->av[i][j], i, j, map))
 				return (0);
 			j++;
 		}
@@ -40,8 +40,7 @@ int	is_good(char c, int i, int j, t_game *game)
 		return (1);
 	if (find_direction(c, i, j, game))
 		return (1);
-	return 0;
-	
+	return (0);
 }
 
 bool	find_direction(char c, int i, int j, t_game *game)
