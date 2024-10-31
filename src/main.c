@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:21:18 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/10/30 22:17:20 by ramzerk          ###   ########.fr       */
+/*   Updated: 2024/10/31 15:50:40 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,14 @@ int	input(int key, t_game *data)
 	return (1);
 }
 
-void print_tab(char **tab)
+void	print_tab(char **tab)
 {
-	int i =0 ;
-	while(tab[i])
+	int	i;
+
+	i = 0;
+	while (tab[i])
 	{
-		printf("%s\n",tab[i]);
+		printf("%s\n", tab[i]);
 		i++;
 	}
 }
@@ -45,13 +47,14 @@ void print_tab(char **tab)
 int	main(int ac, char **av)
 {
 	t_game	game;
-	if (ac != 2)
-		return 0;
+
+	(void)ac;
+	(void)av;
 	game = (t_game){0};
-	fill_struct(&game, av);
-	// printf("here\n");
-	// if (!parsing(&game))
-	// 	return (0);
+	// fill_struct(&game, av);
+	// // printf("here\n");
+	// // if (!parsing(&game))
+	// // 	return (0);
 	if (!minilibx(&game))
 		return (0);
 	if (!raycasting(&game))
@@ -59,11 +62,11 @@ int	main(int ac, char **av)
 	mlx_key_hook(game.win, input, &game);
 	mlx_hook(game.win, 17, 0, quit_click, &game);
 	mlx_loop(game.mlx);
+	free(game.pixel.img);
 }
 
-
 /*
-	
+
 	TODO texture:
 	- find texture for the wall, ceiling and floor
 	- be able to change the texture
@@ -73,9 +76,9 @@ int	main(int ac, char **av)
 	TODO map:
 	- must be 1 0 W D S E W
 	- must be close (0 not surround by anything but P or 1)
-	- 
+	-
 
-	TODO
+	TODO pixel:
 	-	refaire mlx put pixel
-		
+
 	*/

@@ -10,7 +10,7 @@
 # include <stddef.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <strings.h>
+# include <string.h>
 # include <unistd.h>
 
 # define MLX_ERROR 0
@@ -25,19 +25,17 @@
 
 # define RECT_P_SIZE 10
 # define RECT_WALL_SIZE 30
-# define SCREEN_WIDHT_SIZE 1900 
-# define SCREEN_HEIGHT_SIZE 1080 
 # define FOV 60
 # define KEYPRESS 2
 # define KEYRELEASE 3
 # define NUM_TEXTURES 4
 
-#define RED_PIXEL 0xFF0000
-#define BLUE_PIXEL 0x000000FF
-#define GREEN_PIXEL 0X00FF00
-#define WHITE_PIXEL 0XFFFFFF
-#define GREY_PIXEL 0X808080
-#define BLACK_PIXEL 0X000000
+# define RED_PIXEL 0xFF0000
+# define BLUE_PIXEL 0x000000FF
+# define GREEN_PIXEL 0X00FF00
+# define WHITE_PIXEL 0XFFFFFF
+# define GREY_PIXEL 0X808080
+# define BLACK_PIXEL 0X000000
 
 typedef struct s_pos
 {
@@ -45,14 +43,24 @@ typedef struct s_pos
 	int				y;
 }					t_pos;
 
+typedef struct s_pixel
+{
+	void			*img;
+	char			*addr;
+	int				bpp;
+	int				line_len;
+	int				endian;
+}					t_pixel;
+
 typedef struct s_game
 {
 	char			**map;
-	struct s_pos	pos;
 	int				fd;
 	char			**av;
 	void			*mlx;
 	void			*win;
+	struct s_pos	pos;
+	struct s_pixel	pixel;
 }					t_game;
 
 //############ parsing ####################
@@ -66,8 +74,6 @@ int					letter_check(t_game *m);
 int					is_good(char c);
 
 bool				find_direction(char c, int i, int j, t_game *game);
-
-
 
 //############ minilibx #####################
 
@@ -85,11 +91,11 @@ char				*ft_strdup(char *str);
 
 int					ft_strstr(char *str, char *to_find);
 
-int 				ft_strlen(char *str);
+int					ft_strlen(char *str);
 
 int					ft_strlcpy(char *dest, char *src, int len);
 
-char				*ft_strjoin(char  *s1, char  *s2);
+char				*ft_strjoin(char *s1, char *s2);
 
 void				ft_putstr_fd(char *s, int fd);
 
@@ -102,6 +108,5 @@ void				*ft_calloc(size_t n, size_t s);
 int					quit_click(t_game *d);
 
 void				quit_esc(t_game *d);
-
 
 #endif

@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 10:34:44 by ramzerk           #+#    #+#             */
-/*   Updated: 2024/10/30 22:21:43 by ramzerk          ###   ########.fr       */
+/*   Updated: 2024/10/31 13:33:01 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "cube.h"
-
 
 // typedef struct o_img
 // {
@@ -25,7 +23,6 @@
 //     int		line_len;
 //     int		endian;
 // }	t_img_data;
-
 
 // void    img_pix_put(t_img_data *img, int x, int y, int color)
 // {
@@ -52,7 +49,6 @@
 //         ++i;
 //     }
 // }
-
 
 // void    draw_wall(t_map_datadata)
 // {
@@ -102,7 +98,7 @@
 //     {
 //         img_pix_put(img, x1, y1, color);
 //         if (x1 == x2 && y1 == y2)
-//             break;
+//             break ;
 //         e2 = err;
 //         if (e2 > -dx)
 //         {
@@ -116,7 +112,6 @@
 //         }
 //     }
 // }
-
 
 // int    draw_player_rect(t_map_datadata)
 // {
@@ -144,7 +139,6 @@
 
 //     // y = 0;
 //     // x = 0;
-
 
 //     if (data->background_img == NULL)
 //     {
@@ -214,23 +208,39 @@
 //             if (y < SCREEN_HEIGHT_SIZE && x < SCREEN_WIDHT_SIZE)
 //             {
 //                 if (data->map[y][x] == WALL)
-//                     break;
+//                     break ;
 //             }
 //             line_length+=1.0;
 //         }
-//         draw_line(data->background_img, player_center_x , player_center_y, line_end_x, line_end_y, GREEN_PIXEL);
+//         draw_line(data->background_img, player_center_x , player_center_y,
+// line_end_x, line_end_y, GREEN_PIXEL);
 //         i++;
 //     }
 // }
 
+void	ft_display(t_pixel *pixel, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = pixel->addr + (y * pixel->line_len + x * (pixel->bpp / 8));
+	*(unsigned int *)dst = color;
+}
+
+
 bool	raycasting(t_game *g)
 {
-	printf("raycaster:\n");
-	mlx_pixel_put(g->mlx, g->win, 500, 500, RED_PIXEL);
-	mlx_pixel_put(g->mlx, g->win, 501, 501, RED_PIXEL);
-	mlx_pixel_put(g->mlx, g->win, 502, 502, RED_PIXEL);
-	mlx_pixel_put(g->mlx, g->win, 503, 503, RED_PIXEL);
-	mlx_pixel_put(g->mlx, g->win, 504, 504, RED_PIXEL);
-	mlx_pixel_put(g->mlx, g->win, 505, 505, RED_PIXEL);
+	t_pixel p;
+	p = g->pixel;
+	p.img = mlx_new_image(g->mlx, 1920, 1080);
+	p.addr = mlx_get_data_addr(p.img, &p.bpp, &p.line_len, &p.endian);
+	int i, j;
+	i = 0;
+	while (i++ < 1920)
+	{
+		j = 0;
+		while (j++ < 1080)
+			ft_display(&p, i, j, 0x00FF0F00);
+	}
+	mlx_put_image_to_window(g->mlx, g->win, p.img, 0, 0);
 	return (1);
 }
