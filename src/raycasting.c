@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 10:34:44 by ramzerk           #+#    #+#             */
-/*   Updated: 2024/10/31 13:33:01 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/10/31 17:55:12 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,10 +226,10 @@ void	ft_display(t_pixel *pixel, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-
 bool	raycasting(t_game *g)
 {
-	t_pixel p;
+	t_pixel	p;
+
 	p = g->pixel;
 	p.img = mlx_new_image(g->mlx, 1920, 1080);
 	p.addr = mlx_get_data_addr(p.img, &p.bpp, &p.line_len, &p.endian);
@@ -239,8 +239,11 @@ bool	raycasting(t_game *g)
 	{
 		j = 0;
 		while (j++ < 1080)
+		{
+			usleep(10);
 			ft_display(&p, i, j, 0x00FF0F00);
+		}
+		mlx_put_image_to_window(g->mlx, g->win, p.img, 0, 0);
 	}
-	mlx_put_image_to_window(g->mlx, g->win, p.img, 0, 0);
-	return (1);
+		return (1);
 }
