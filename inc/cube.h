@@ -21,6 +21,24 @@
 # define BUFFER_SIZE 10
 # define FILE_DESCRIPTORS 256
 
+# define PI 3.1415926535
+
+# define RECT_P_SIZE 10
+# define RECT_WALL_SIZE 30
+# define SCREEN_WIDHT_SIZE 1900 
+# define SCREEN_HEIGHT_SIZE 1080 
+# define FOV 60
+# define KEYPRESS 2
+# define KEYRELEASE 3
+# define NUM_TEXTURES 4
+
+#define RED_PIXEL 0xFF0000
+#define BLUE_PIXEL 0x000000FF
+#define GREEN_PIXEL 0X00FF00
+#define WHITE_PIXEL 0XFFFFFF
+#define GREY_PIXEL 0X808080
+#define BLACK_PIXEL 0X000000
+
 typedef struct s_pos
 {
 	int				x;
@@ -45,7 +63,7 @@ int					read_cub(t_game *data);
 
 int					letter_check(t_game *m);
 
-int					is_good(char c, int i, int j, t_game *game);
+int					is_good(char c);
 
 bool				find_direction(char c, int i, int j, t_game *game);
 

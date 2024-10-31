@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_letter.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 15:46:19 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/10/30 14:58:06 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/10/30 22:11:44 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	letter_check(t_game *map)
 		while (map->av[i][j])
 		{
 			if (!is_good(map->av[i][j]))
-				return (0);
+				return (printf("Error\nWrong Char\n"),0);
 			j++;
 		}
 		i++;
@@ -32,7 +32,7 @@ int	letter_check(t_game *map)
 	return (1);
 }
 
-int	is_good(char c, t_game *game)
+int	is_good(char c)
 {
 	if (c == '1')
 		return (1);
@@ -44,9 +44,8 @@ int	is_good(char c, t_game *game)
 		return (1);
 	if (c == 'E')
 		return (1);
-	// if (find_direction(c, i, j, game))
-	// 	return (1);
-	return (0);
+	else
+		return (0);
 }
 
 bool	find_direction(char c, int i, int j, t_game *game)

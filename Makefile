@@ -43,10 +43,10 @@ $(NAME): 				$(OBJS) $(LIBX) $(LIBFT)
 						@$(CC) $(CFLAGS) -lXext -lX11 -Lminilibx-linux/ -lmlx $^ -o $@
 
 $(NAME_MAC): 			$(OBJS) $(LIBX_MAC) $(LIBFT)
-						$(CC) $(CFLAGS) -L/opt/homebrew/Cellar/libxext/1.3.6/lib -lXext -L/opt/homebrew/Cellar/libx11/1.8.7/lib -lX11 -Lminilibx-linux/ -lmlx $^ -o $@
+						$(CC) $(CFLAGS) -L/opt/homebrew/Cellar/libxext/1.3.6/lib -lXext -L/opt/homebrew/Cellar/libx11/1.8.10/lib -lX11 -Lminilibx-linux/ -lmlx $^ -o $@
 
 debug: 					$(OBJS) $(LIBX) $(LIBFT)
-						$(CC) $(CFLAGS) -g3 -gdwarf-4 -L/opt/homebrew/Cellar/libxext/1.3.6/lib -lXext -L/opt/homebrew/Cellar/libx11/1.8.7/lib -lX11 -Lminilibx-linux/ -lmlx $^ -o $(NAME)_debug
+						$(CC) $(CFLAGS) -g3 -gdwarf-4 -L/opt/homebrew/Cellar/libxext/1.3.6/lib -lXext -L/opt/homebrew/Cellar/libx11/1.8.10/lib -lX11 -Lminilibx-linux/ -lmlx $^ -o $(NAME)_debug
 
 $(LIBX_MAC):
 						@make -C minilibx-linux/

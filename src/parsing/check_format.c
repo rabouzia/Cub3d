@@ -6,7 +6,7 @@
 /*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 15:50:18 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/10/06 09:49:32 by ramzerk          ###   ########.fr       */
+/*   Updated: 2024/10/30 22:16:30 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int	read_cub(t_game *data)
 		line = get_next_line(data->fd);
 		if (!line)
 			break ;
+		if (strchr(line, '1'))
 		data->map[i] = ft_strdup(line);
 		if (!data->map[i])
 			break ;

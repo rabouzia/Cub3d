@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:21:18 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/10/30 17:58:02 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/10/30 22:17:20 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ int	main(int ac, char **av)
 	game = (t_game){0};
 	fill_struct(&game, av);
 	// printf("here\n");
-	if (!parsing(&game))
-		return (0);
+	// if (!parsing(&game))
+	// 	return (0);
 	if (!minilibx(&game))
 		return (0);
 	if (!raycasting(&game))
