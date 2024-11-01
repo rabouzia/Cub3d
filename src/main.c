@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:21:18 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/10/31 15:50:40 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/01 00:00:21 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,33 +17,45 @@ void	fill_struct(t_game *game, char **av)
 	game->av = av;
 }
 
+	// if (key == RIGHT)
+		
+	// if (key == LEFT)
+	// 	return (1);
+
+
+
+	// fill_struct(&game, av);
+	// // printf("here\n");
+	// // if (!parsing(&game))
+	// // 	return (0);
+
+
+
 int	input(int key, t_game *data)
 {
-	if (key == XK_Escape)
-		quit_esc(data);
-	if (key == RIGHT)
-		return (1);
-	if (key == LEFT)
-		return (1);
-	if (key == UP)
-		return (1);
-	if (key == DOWN)
-		return (1);
+	(void) data;
+	// printf("key %d\n", key);
+	// if (key == XK_Escape)
+	// 	quit_esc(data);
+	static double facteur = 1.0; 
+	 if (key == UP) 
+	{
+		// printf("up %d\n", key);
+
+		facteur /= 1 - 0.003; 
+		raycasting(data, facteur, BLUE_PIXEL);
+	}
+	// else if (key == DOWN) 
+	// {
+
+	// 	// printf("down %d\n", key);
+	// 	facteur *= 1 - 0.003; 
+	// 	raycasting(data, facteur, RED_PIXEL);
+	// }
+
 	return (1);
 }
-
-void	print_tab(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		printf("%s\n", tab[i]);
-		i++;
-	}
-}
-
+	
 int	main(int ac, char **av)
 {
 	t_game	game;
@@ -51,18 +63,13 @@ int	main(int ac, char **av)
 	(void)ac;
 	(void)av;
 	game = (t_game){0};
-	// fill_struct(&game, av);
-	// // printf("here\n");
-	// // if (!parsing(&game))
-	// // 	return (0);
 	if (!minilibx(&game))
 		return (0);
-	if (!raycasting(&game))
-		return (0);
-	mlx_key_hook(game.win, input, &game);
+	// if (!raycasting(&game))
+	// 	return (0);
+	mlx_loop_hook(game.mlx , &input, &game);
 	mlx_hook(game.win, 17, 0, quit_click, &game);
 	mlx_loop(game.mlx);
-	free(game.pixel.img);
 }
 
 /*

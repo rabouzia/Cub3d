@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 10:34:44 by ramzerk           #+#    #+#             */
-/*   Updated: 2024/10/31 17:55:12 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/10/31 23:10:32 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,7 +218,7 @@
 //     }
 // }
 
-void	ft_display(t_pixel *pixel, int x, int y, int color)
+void	ft_display_pixel(t_pixel *pixel, int x, int y, int color)
 {
 	char	*dst;
 
@@ -226,24 +226,36 @@ void	ft_display(t_pixel *pixel, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-bool	raycasting(t_game *g)
+
+int display_loop(t_pixel *p, t_game *g ,double facteur, int color)
+{
+	(void) facteur;
+	int i, j;
+	i = 0;
+
+	while (i++ < (1920 * facteur))
+	{
+		j = 0;
+		while (j++ < (1080 * facteur))
+		{
+			ft_display_pixel(p, i, j, color);
+		}
+	}
+	mlx_put_image_to_window(g->mlx, g->win, p->img, 0, 0);
+	return 1;
+}
+
+bool	raycasting(t_game *g, double facteur, int color)
 {
 	t_pixel	p;
 
 	p = g->pixel;
 	p.img = mlx_new_image(g->mlx, 1920, 1080);
 	p.addr = mlx_get_data_addr(p.img, &p.bpp, &p.line_len, &p.endian);
-	int i, j;
-	i = 0;
-	while (i++ < 1920)
+	while(1)
 	{
-		j = 0;
-		while (j++ < 1080)
-		{
-			usleep(10);
-			ft_display(&p, i, j, 0x00FF0F00);
-		}
-		mlx_put_image_to_window(g->mlx, g->win, p.img, 0, 0);
+		display_loop(&p ,g, facteur, color);
+			
 	}
-		return (1);
+	return (1);
 }

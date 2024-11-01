@@ -3,6 +3,7 @@
 
 # include "../minilibx-linux/mlx.h"
 # include <X11/keysym.h>
+# include <X11/X.h>
 # include <fcntl.h>
 # include <limits.h>
 # include <math.h>
@@ -14,14 +15,22 @@
 # include <unistd.h>
 
 # define MLX_ERROR 0
+
+// LINUX
 # define UP 115
 # define DOWN 119
 # define LEFT 97
 # define RIGHT 100
+// MAC 
+# define MUP 115
+# define MDOWN 119
+# define MLEFT 97
+# define MRIGHT 100
+
 # define BUFFER_SIZE 10
 # define FILE_DESCRIPTORS 256
 
-# define PI 3.1415926535
+# define PI 3.14159265358979323846
 
 # define RECT_P_SIZE 10
 # define RECT_WALL_SIZE 30
@@ -83,11 +92,13 @@ bool				minilibx(t_game *game);
 
 //############ raycasting ##################
 
-bool				raycasting(t_game *game);
+bool				raycasting(t_game *game, double facteur, int color);
 
 //############ mini_libft ###################
 
 char				*ft_strdup(char *str);
+
+void				print_tab(char **tab);
 
 int					ft_strstr(char *str, char *to_find);
 
