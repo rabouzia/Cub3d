@@ -1,3 +1,7 @@
 *.o
 obj/
+cubeobj/
+*.c
+cube_MAC
 cube
+vgcore*
