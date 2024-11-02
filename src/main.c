@@ -6,7 +6,7 @@
 /*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:21:18 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/02 23:42:02 by ramzerk          ###   ########.fr       */
+/*   Updated: 2024/11/02 23:57:21 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,8 +171,10 @@ int	start_the_game(t_cube *cube)
 	init_the_player(*cube);
 	mlx_loop_hook(cube->mlx, &game_loop, &cube);
 //  mlx_loop_hook(game.mlx , &input, &game);
-	mlx_key_hook(cube->mlx, &mlx_key, &cube);
-// 	mlx_hook(game.win, 17, 0, quit_click, &game);
+	// mlx_key_hook(cube->mlx, &mlx_key, &cube);
+	mlx_hook(cube->win, 17, 0, &mlx_key, &cube);
+	printf("hey listen %p\n", cube->mlx);
+	mlx_loop(cube->mlx);
 	return 1;
 }
 // mlx_loop_hook(game.mlx , &input, &game);
@@ -206,7 +208,5 @@ int main()
 	t_cube cube;
 	cube.map = *init_argumet();
 	start_the_game(&cube);
-	mlx_loop(cube.mlx);
-	printf("hey listen\n");
 	return 0;
 }

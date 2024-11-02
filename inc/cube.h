@@ -338,50 +338,50 @@ typedef enum cursor
 }	cursor_t;
 
 
-typedef struct mlx_texture
-{
-	uint32_t	width;
-	uint32_t	height;
-	uint8_t		bytes_per_pixel;
-	uint8_t*	pixels;
-}	mlx_texture_t;
+// typedef struct mlx_texture
+// {
+// 	uint32_t	width;
+// 	uint32_t	height;
+// 	uint8_t		bytes_per_pixel;
+// 	uint8_t*	pixels;
+// }	mlx_texture_t;
 
-typedef struct xpm
-{
-	mlx_texture_t	texture;
-	int32_t			color_count;
-	int32_t			cpp;
-	char			mode;
-}	xpm_t;
+// typedef struct xpm
+// {
+// 	mlx_texture_t	texture;
+// 	int32_t			color_count;
+// 	int32_t			cpp;
+// 	char			mode;
+// }	xpm_t;
 
-typedef struct mlx_instance
-{
-	int32_t	x;
-	int32_t	y;
-	int32_t	z;
-	bool	enabled;
-}	mlx_instance_t;
+// typedef struct mlx_instance
+// {
+// 	int32_t	x;
+// 	int32_t	y;
+// 	int32_t	z;
+// 	bool	enabled;
+// }	mlx_instance_t;
 
 
-typedef struct mlx_image
-{
-	const uint32_t	width;
-	const uint32_t	height;
-	uint8_t*		pixels;
-	mlx_instance_t*	instances;
-	size_t			count;
-	bool			enabled;
-	void*			context;
-}	mlx_image_t;
+// typedef struct mlx_image
+// {
+// 	const uint32_t	width;
+// 	const uint32_t	height;
+// 	uint8_t*		pixels;
+// 	mlx_instance_t*	instances;
+// 	size_t			count;
+// 	bool			enabled;
+// 	void*			context;
+// }	mlx_image_t;
 
-typedef struct mlx
-{
-	void*		window;
-	void*		context;
-	int32_t		width;
-	int32_t		height;
-	double		delta_time;
-}	mlx_t;
+// typedef struct mlx
+// {
+// 	void*		window;
+// 	void*		context;
+// 	int32_t		width;
+// 	int32_t		height;
+// 	double		delta_time;
+// }	mlx_t;
 
 typedef enum mlx_errno
 {
