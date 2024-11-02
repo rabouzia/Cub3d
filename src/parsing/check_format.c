@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_format.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 15:50:18 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/10/31 11:10:20 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/02 23:31:21 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,18 @@ int	nb_ligne(char *file)
 	return (i);
 }
 
-int	read_cub(t_game *data)
+int	read_cub(t_cube *data)
 {
-	int		i;
-	int		j;
+	// int		i;
+	// int		j;
 	char	*line;
 
 	if (!check_extension(data->av[2]))
 		return (ft_putstr_fd("Error\nWrong file extension\n", 1), 0);
-	i = 0;
-	j = nb_ligne(data->av[2]);
+	// i = 0;
+	// j = nb_ligne(data->av[2]);
 	data->fd = open(data->av[2], O_RDONLY, 0664);
-	data->map = ft_calloc(j + 1, sizeof(char *));
+	// data->map = ft_calloc(j + 1, sizeof(char *));
 	while (1)
 	{
 		line = get_next_line(data->fd);
@@ -61,21 +61,22 @@ int	read_cub(t_game *data)
 		if (strchr(line, '1') == 0)
 	{
 		free(line);
-		i++;
+		// i++;
 	}
-		data->map[i] = ft_strdup(line);
-		if (!data->map[i])
+		// data->map[i] = ft_strdup(line);
+		// if (!data->map[i])
 			break ;
 		free(line);
-		i++;
+		// i++;
 	}
 	// if (!init_init(data))
 	// 	return (0);
 	return (1);
 }
-int	is_map_valid(t_game *m)
+int	is_map_valid(t_cube *m)
 {
-	if (!m->map || !(*m->map))
+	(void) m;
+	// if (!m->map || !(*m->map))
 		return (ft_putstr_fd("Error\n Empty map\n", 1), 0);
 // 	if ((m->count.lines / 64 < 5) && m->count.columns / 64 < 5)
 // 		return (return_map_error("Error\n Too small\n", m), 0);

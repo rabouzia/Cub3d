@@ -6,18 +6,18 @@
 /*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:29:06 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/10/30 22:10:20 by ramzerk          ###   ########.fr       */
+/*   Updated: 2024/11/02 23:29:19 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-int	is_validmap(t_game *map)
+int	is_validmap(t_cube *map)
 {
 	(void) map;
 	return (1);
 }
-bool	parsing(t_game *game)
+bool	parsing(t_cube *game)
 {
 	// if (!map_valid(game))
 	// 	return (0);

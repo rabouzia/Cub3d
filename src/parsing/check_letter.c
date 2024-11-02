@@ -6,13 +6,13 @@
 /*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 15:46:19 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/10/30 22:11:44 by ramzerk          ###   ########.fr       */
+/*   Updated: 2024/11/02 23:29:46 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-int	letter_check(t_game *map)
+int	letter_check(t_cube *map)
 {
 	int	i;
 	int	j;
@@ -48,29 +48,29 @@ int	is_good(char c)
 		return (0);
 }
 
-bool	find_direction(char c, int i, int j, t_game *game)
+bool	find_direction(char c, int i, int j, t_cube *cube)
 {
 	if (c == 'N')
 	{
-		game->pos.x = i;
-		game->pos.y = j;
+		cube->pos.x = i;
+		cube->pos.y = j;
 		return (1);
 	}
 	else if (c == 'S')
 	{
-		game->pos.x = i;
-		game->pos.y = j;
+		cube->pos.x = i;
+		cube->pos.y = j;
 		return (1);
 	}
 	else if (c == 'E')
 	{
-		game->pos.x = i;
-		game->pos.y = j;
+		cube->pos.x = i;
+		cube->pos.y = j;
 		return (1);
 	}
 	{
-		game->pos.x = i;
-		game->pos.y = j;
+		cube->pos.x = i;
+		cube->pos.y = j;
 		return (1);
 	}
 	return (0);
