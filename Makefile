@@ -15,7 +15,7 @@ SRC_FILES	=			main.c 							\
 						parsing/get_next_line.c
 
 CC			=			cc
-CFLAGS 		=			-Wall -Wextra -Werror -g3 -Iinc
+CFLAGS 		=			-ffast-math -Wall -Wextra -Werror -g3 -Iinc
 
 LIBX		=			minilibx-linux/libmlx.a
 LIBX_MAC	=			minilibx-linux/libmlx_Darwin.a

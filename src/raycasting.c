@@ -6,7 +6,7 @@
 /*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 10:34:44 by ramzerk           #+#    #+#             */
-/*   Updated: 2024/11/02 23:28:10 by ramzerk          ###   ########.fr       */
+/*   Updated: 2024/11/03 10:39:28 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,16 @@ int display_loop(t_pixel *p, t_cube *g ,double facteur, int color)
 
 bool	raycasting(t_cube *g, double facteur, int color)
 {
-	t_pixel	p;
+	(void)g;
+	(void)facteur;
+	(void)color;
+	// t_pixel	p;
 
-	p = g->pixel;
-	p.img = mlx_new_image(g->mlx, 1920, 1080);
-	p.addr = mlx_get_data_addr(p.img, &p.bpp, &p.line_len, &p.endian);
-	while(1)
-	{
-		display_loop(&p ,g, facteur, color);
+	// p = g->pixel;
+	// p.img = mlx_new_image(g->mlx, 1920, 1080);
+
+		// display_loop(&p ,g, facteur, color);
 			
-	}
 	return (1);
 }
 

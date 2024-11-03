@@ -6,7 +6,7 @@
 /*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:21:18 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/02 23:57:21 by ramzerk          ###   ########.fr       */
+/*   Updated: 2024/11/03 10:57:55 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,41 +16,41 @@
 // 	game->av = av;
 // }
 
-// 	// if (key == RIGHT)
+	// if (key == RIGHT)
 		
-// 	// if (key == LEFT)
-// 	// 	return (1);
+	// if (key == LEFT)
+	// 	return (1);
 
 
 
-// 	// fill_struct(&game, av);
-// 	// // printf("here\n");
-// 	// // if (!parsing(&game))
-// 	// // 	return (0);
+	// fill_struct(&game, av);
+	// printf("here\n");
+	// if (!parsing(&game))
+	// 	return (0);
 
 
 
 // int	input(int key, t_game *data)
 // {
 // 	(void) data;
-// 	// printf("key %d\n", key);
-// 	// if (key == XK_Escape)
-// 	// 	quit_esc(data);
+	// printf("key %d\n", key);
+	// if (key == XK_Escape)
+	// 	quit_esc(data);
 // 	static double facteur = 1.0; 
 // 	 if (key == UP) 
 // 	{
-// 		// printf("up %d\n", key);
+		// printf("up %d\n", key);
 
 // 		facteur /= 1 - 0.003; 
 // 		raycasting(data, facteur, BLUE_PIXEL);
 // 	}
-// 	// else if (key == DOWN) 
-// 	// {
+	// else if (key == DOWN) 
+	// {
 
-// 	// 	// printf("down %d\n", key);
-// 	// 	facteur *= 1 - 0.003; 
-// 	// 	raycasting(data, facteur, RED_PIXEL);
-// 	// }
+		// printf("down %d\n", key);
+	// 	facteur *= 1 - 0.003; 
+	// 	raycasting(data, facteur, RED_PIXEL);
+	// }
 
 // 	return (1);
 // }
@@ -64,8 +64,8 @@
 // 	game = (t_game){0};
 // 	if (!minilibx(&game))
 // 		return (0);
-// 	// if (!raycasting(&game))
-// 	// 	return (0);
+	// if (!raycasting(&game))
+	// 	return (0);
 //
 
 /*
@@ -141,25 +141,24 @@ void	ft_exit(t_cube *cube) 		// exit the game
 
 
 
-int	game_loop(void *ml)	// game loop
+int	game_loop(t_cube	*cube)	// game loop
 {
-	t_cube	*cube;
 
-	cube = ml;	// cast to the mlx structure
-	mlx_clear_window(cube->mlx, cube->win);	// delete the image
-	cube->win = mlx_new_image(cube->mlx, S_W, S_H);	// create new image
-	hook(cube, 0, 0); // hook the player
-	cast_rays(cube);	// cast the rays
+	// cube->pixel.img = mlx_new_image(cube->mlx, S_W, S_H);
+	printf("hey listen %d\n", S_W);
+	hook(cube, 0, 0);
+	cast_rays(cube);
 	mlx_put_image_to_window(cube->mlx, cube->win, cube->pixel.img, 0, 0);
+	mlx_clear_window(cube->mlx, cube->win);
 	return 0;
 }
 
-void init_the_player(t_cube cube)
+void init_the_player(t_cube *cube)
 {
-	cube.player->plyr_x = cube.map.p_x * TILE_SIZE + TILE_SIZE / 2;
-	cube.player->plyr_y = cube.map.p_y * TILE_SIZE + TILE_SIZE / 2;
-	cube.player->fov_rd = (FOV * M_PI) / 180;
-	cube.player->angle = M_PI;
+	cube->player->plyr_x = cube->map.p_x * TILE_SIZE + TILE_SIZE / 2;
+	cube->player->plyr_y = cube->map.p_y * TILE_SIZE + TILE_SIZE / 2;
+	cube->player->fov_rd = (FOV * M_PI) / 180;
+	cube->player->angle = M_PI;
 }
 
 int	start_the_game(t_cube *cube)
@@ -168,13 +167,25 @@ int	start_the_game(t_cube *cube)
 	cube->ray = calloc(1, sizeof(t_ray));	
 	cube->mlx = mlx_init();
 	cube->win = mlx_new_window(cube->mlx, 1920, 1080, "Cube 3D");
-	init_the_player(*cube);
-	mlx_loop_hook(cube->mlx, &game_loop, &cube);
-//  mlx_loop_hook(game.mlx , &input, &game);
+	cube->pixel.addr = mlx_get_data_addr(cube->pixel.img, &cube->pixel.bpp, &cube->pixel.line_len, &cube->pixel.endian);
+
+	init_the_player(cube);
+	
+ 	mlx_hook(cube->mlx , 3, 2L, &mlx_key, &cube);
 	// mlx_key_hook(cube->mlx, &mlx_key, &cube);
-	mlx_hook(cube->win, 17, 0, &mlx_key, &cube);
-	printf("hey listen %p\n", cube->mlx);
+	// mlx_hook(cube->win, 17, 0, &mlx_key, &cube);
+	mlx_loop_hook(cube->mlx, &game_loop, &cube);
 	mlx_loop(cube->mlx);
+
+
+/*
+	mlx_hook(ori->mlxwin, 3, 2L, han_inp_release, ori);
+	mlx_hook(ori->mlxwin, 2, 1L, han_inp_press, ori);
+	mlx_hook(ori->mlxwin, 17, 0, brexit_key, ori);
+	mlx_hook(ori->mlxwin, MotionNotify, PointerMotionMask, han_mouse_move, ori);
+	mlx_loop_hook(ori->mlxptr, raycasting, ori);
+	mlx_loop(ori->mlxptr);
+*/
 	return 1;
 }
 // mlx_loop_hook(game.mlx , &input, &game);
@@ -199,7 +210,7 @@ t_map_info *init_argumet()	// init the data structure
 	map->p_y = 3; // player y position in the map
 	map->p_x = 14; // player x position in the map
 	map->w_map = 25; // map wimaph
-	map->h_map = 9; // map height
+	map->h_map = 9; // map he
 	return (map);
 }
 

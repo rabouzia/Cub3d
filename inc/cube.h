@@ -249,8 +249,8 @@ typedef struct s_cube
 	char			**av;
 	void			*mlx;
 	void			*win;
-	struct s_pos	pos;
-	struct s_pixel	pixel;
+	// struct s_pos	pos;
+	t_pixel			pixel;
 	t_map_info		map;
 	t_ray			*ray;	// the ray structure
 	t_player		*player;	// the player structure
