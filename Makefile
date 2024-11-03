@@ -9,7 +9,7 @@ SRC_FILES	=			main.c 							\
 						raycasting.c 					\
 						clean.c 						\
 						libft_portable.c 				\
-						parsing/parsing.c 				\
+					#	parsing/parsing.c 				\
 						parsing/check_letter.c			\
 						parsing/check_format.c			\
 						parsing/get_next_line.c
@@ -40,7 +40,7 @@ re: 					fclean all
 mac: 					$(NAME_MAC)
 
 $(NAME): 				$(OBJS) $(LIBX) $(LIBFT)
-						@$(CC) $(CFLAGS) -lXext -lX11 -Lminilibx-linux/ -lmlx $^ -o $@
+						@$(CC) $(CFLAGS) -lXext -lX11 -Lminilibx-linux/ -lmlx $^ -o $@ -lm
 
 $(NAME_MAC): 			$(OBJS) $(LIBX_MAC) $(LIBFT)
 						$(CC) $(CFLAGS) -L/opt/homebrew/Cellar/libxext/1.3.6/lib -lXext -L/opt/homebrew/Cellar/libx11/1.8.10/lib -lX11 -Lminilibx-linux/ -lmlx $^ -o $@

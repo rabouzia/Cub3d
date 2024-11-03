@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 10:34:44 by ramzerk           #+#    #+#             */
-/*   Updated: 2024/11/03 10:39:28 by ramzerk          ###   ########.fr       */
+/*   Updated: 2024/11/03 20:30:42 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
+# include <math.h>
 
 void	ft_display_pixel(t_pixel *pixel, int x, int y, int color)
 {
