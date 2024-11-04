@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:21:18 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/03 21:20:28 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/04 17:07:39 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,41 +130,41 @@ void	ft_exit(t_cube *cube) // exit the game
 int	game_loop(t_cube *cube) // game loop
 {
 	// cube->pixel.img = mlx_new_image(cube->mlx, S_W, S_H);
-	printf("hey listen %d\n", S_W);
+	// printf("hey listen %d\n", S_W);
 	hook(cube, 0, 0);
 	cast_rays(cube);
-	mlx_put_image_to_window(cube->mlx, cube->win, cube->pixel.img, 0, 0);
-	mlx_clear_window(cube->mlx, cube->win);
+	mlx_put_image_to_window(cube->mlx, cube->win, cube->image.img, 0, 0);
+	// mlx_clear_window(cube->mlx, cube->win);
 	return (0);
 }
 
 void	init_the_player(t_cube *cube)
 {
-	cube->player->plyr_x = cube->map.p_x * TILE_SIZE + TILE_SIZE / 2;
-	cube->player->plyr_y = cube->map.p_y * TILE_SIZE + TILE_SIZE / 2;
-	cube->player->fov_rd = (FOV * M_PI) / 180;
-	cube->player->angle = M_PI;
+	cube->player.plyr_x = cube->map.p_x * TILE_SIZE + TILE_SIZE / 2;
+	cube->player.plyr_y = cube->map.p_y * TILE_SIZE + TILE_SIZE / 2;
+	cube->player.fov_rd = (FOV * M_PI) / 180;
+	cube->player.angle = M_PI;
 }
 
 int	start_the_game(t_cube *cube)
 {
-	int a = 500;
-	cube->player = calloc(1, sizeof(t_player));
-	cube->ray = calloc(1, sizeof(t_ray));
+	int	a;
+
+	a = 500;
 	cube->mlx = mlx_init();
 	cube->win = mlx_new_window(cube->mlx, 1920, 1080, "Cube 3D");
-	cube->pixel.img = mlx_xpm_file_to_image(cube->mlx, "/home/rabouzia/Cub3d/src/wall.xpm", &a, &a);
-	cube->pixel.bpp = 0;
-	cube->pixel.line_len = 0;
-	cube->pixel.endian = 0;
-	// cube->pixel.addr = 0;
+	cube->pixel.img = mlx_xpm_file_to_image(cube->mlx,
+			"/home/rabouzia/Cub3d/src/wall.xpm", &a, &a);
 	cube->pixel.addr = mlx_get_data_addr(cube->pixel.img, &cube->pixel.bpp,
 			&cube->pixel.line_len, &cube->pixel.endian);
+	cube->image.img = mlx_new_image(cube->mlx, S_W, S_H);
+	cube->image.addr = mlx_get_data_addr(cube->image.img, &cube->image.bpp,
+			&cube->image.line_len, &cube->image.endian);
 	init_the_player(cube);
-	mlx_hook(cube->mlx, 0, 1, &mlx_key, &cube);
+	mlx_hook(cube->mlx, 0, 1, &mlx_key, cube);
 	// mlx_key_hook(cube->mlx, &mlx_key, &cube);
-	// mlx_hook(cube->win, 17, 0, &mlx_key, &cube);
-	mlx_loop_hook(cube->mlx, &game_loop, &cube);
+	mlx_hook(cube->win, 17, 0, &mlx_key, &cube);
+	mlx_loop_hook(cube->mlx, &game_loop, cube);
 	mlx_loop(cube->mlx);
 	/*
 		mlx_hook(ori->mlxwin, 3, 2L, han_inp_release, ori);
@@ -182,9 +182,8 @@ int	start_the_game(t_cube *cube)
 // 	mlx_loop(game.mlx);
 // }
 
-t_map_info	*init_argumet(void) // init the data structure
+void	init_argumet(t_map_info *map) // init the data structure
 {
-	t_map_info *map = calloc(1, sizeof(t_map_info));
 	map->map2d = calloc(10, sizeof(char *));
 	map->map2d[0] = strdup("1111111111111111111111111");
 	map->map2d[1] = strdup("1000000000000000000100001");
@@ -199,14 +198,44 @@ t_map_info	*init_argumet(void) // init the data structure
 	map->p_y = 3;    // player y position in the map
 	map->p_x = 14;   // player x position in the map
 	map->w_map = 25; // map wimaph
-	map->h_map = 9;  // map he
-	return (map);
+	map->h_map = 9;  // map height
+}
+
+void	init_all(t_cube *cube)
+{
+	cube->map.p_x = 0;
+	cube->map.p_y = 0;
+	cube->map.w_map = 0;
+	cube->map.h_map = 0;
+	cube->map.map2d = NULL;
+	cube->pixel.addr = 0;
+	cube->pixel.bpp = 0;
+	cube->pixel.endian = 0;
+	cube->pixel.img = 0;
+	cube->pixel.line_len = 0;
+	cube->player.angle = 0;
+	cube->player.fov_rd = 0;
+	cube->player.l_r = 0;
+	cube->player.plyr_x = 0;
+	cube->player.plyr_y = 0;
+	cube->player.rot = 0;
+	cube->player.u_d = 0;
+	cube->ray.distance = 0;
+	cube->ray.flag = 0;
+	cube->ray.ray_ngl = 0;
+	cube->fd = 0;
+	cube->mlx = NULL;
+	cube->win = NULL;
+	cube->tab_map = NULL;
 }
 
 int	main(void)
 {
 	t_cube cube;
-	cube.map = *init_argumet();
+
+	memset(&cube, 0, sizeof(t_cube));
+	init_all(&cube);
+	init_argumet(&cube.map);
 	start_the_game(&cube);
 	return (0);
 }
