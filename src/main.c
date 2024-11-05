@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:21:18 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/04 17:07:39 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/05 13:46:56 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,8 +120,8 @@ void	ft_exit(t_cube *cube) // exit the game
 	// free(cube.map); // free the data structure
 	// free(cube->ply); // free the player structure
 	// free(cube->ray); // free the ray structure
-	// // mlx_destroy_image(mlx->mlx_p, mlx->img); // delete the image
-	// mlx_close_window(mlx->mlx_p); // close the window
+	// mlx_destroy_image(mlx->mlx_p, mlx->img);
+	// mlx_close_window(mlx->win); // close the window
 	// mlx_terminate(mlx->mlx_p); // terminate the mlx pointer
 	printf("Game closed\n"); // print the message
 	exit(0);                 // exit the game
@@ -161,11 +161,13 @@ int	start_the_game(t_cube *cube)
 	cube->image.addr = mlx_get_data_addr(cube->image.img, &cube->image.bpp,
 			&cube->image.line_len, &cube->image.endian);
 	init_the_player(cube);
-	mlx_hook(cube->mlx, 0, 1, &mlx_key, cube);
+	// mlx_hook(cube->mlx, 0, 1, &key_press, cube);
 	// mlx_key_hook(cube->mlx, &mlx_key, &cube);
-	mlx_hook(cube->win, 17, 0, &mlx_key, &cube);
+	// mlx_hook(cube->mlx, 2, 1L, &key_press, &cube);
+	mlx_hook(cube->win, 2, 1l, &key_press, cube);
 	mlx_loop_hook(cube->mlx, &game_loop, cube);
 	mlx_loop(cube->mlx);
+	
 	/*
 		mlx_hook(ori->mlxwin, 3, 2L, han_inp_release, ori);
 		mlx_hook(ori->mlxwin, 2, 1L, han_inp_press, ori);
