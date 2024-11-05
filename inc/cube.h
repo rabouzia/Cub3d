@@ -93,13 +93,13 @@ typedef struct s_pixel
 
 typedef struct s_player // the player structure
 {
-	int plyr_x;   // player x position in pixels
-	int plyr_y;   // player y position in pixels
-	double angle; // player angle
-	float fov_rd; // field of view in radians
-	int rot;      // rotation flag
-	int l_r;      // left right flag
-	int u_d;      // up down flag
+	double plyr_x; // player x position in pixels
+	double plyr_y; // player y position in pixels
+	double angle;  // player angle
+	float fov_rd;  // field of view in radians
+	int rot;       // rotation flag
+	int l_r;       // left right flag
+	int u_d;       // up down flag
 }					t_player;
 
 typedef struct s_ray // the ray structure
@@ -125,6 +125,7 @@ typedef struct s_cube
 	char			**av;
 	void			*mlx;
 	void			*win;
+	bool			inputs[128];
 	// struct s_pos	pos;
 	t_pixel			pixel;
 	t_pixel			image;
@@ -153,11 +154,13 @@ bool				minilibx(t_cube *cube);
 
 //############ raycasting ##################
 
-			void move_player(t_cube *cube, double move_x, double move_y);
-			void rotate_player(t_cube *cube, int i);
+void				move_player(t_cube *cube, double angle);
+void				rotate_player(t_cube *cube, int i);
 void				hook(t_cube *mlx, double move_x, double move_y);
 void				cast_rays(t_cube *mlx);
-int	key_press(int key, t_cube *cube);
+int					key_press(int key, t_cube *cube);
+int					key_release(int key, t_cube *cube);
+int					inputs(t_cube *cube);
 
 bool				raycasting(t_cube *cube, double facteur, int color);
 

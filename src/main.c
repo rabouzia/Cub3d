@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:21:18 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/05 13:46:56 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/05 18:21:31 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,9 +131,11 @@ int	game_loop(t_cube *cube) // game loop
 {
 	// cube->pixel.img = mlx_new_image(cube->mlx, S_W, S_H);
 	// printf("hey listen %d\n", S_W);
-	hook(cube, 0, 0);
+	// hook(cube, 0, 0);
 	cast_rays(cube);
 	mlx_put_image_to_window(cube->mlx, cube->win, cube->image.img, 0, 0);
+	inputs(cube);
+
 	// mlx_clear_window(cube->mlx, cube->win);
 	return (0);
 }
@@ -164,10 +166,10 @@ int	start_the_game(t_cube *cube)
 	// mlx_hook(cube->mlx, 0, 1, &key_press, cube);
 	// mlx_key_hook(cube->mlx, &mlx_key, &cube);
 	// mlx_hook(cube->mlx, 2, 1L, &key_press, &cube);
-	mlx_hook(cube->win, 2, 1l, &key_press, cube);
+	mlx_hook(cube->win, 2, 1l << 0, &key_press, cube);
+	mlx_hook(cube->win, 3, 1l << 1, &key_release, cube);
 	mlx_loop_hook(cube->mlx, &game_loop, cube);
 	mlx_loop(cube->mlx);
-	
 	/*
 		mlx_hook(ori->mlxwin, 3, 2L, han_inp_release, ori);
 		mlx_hook(ori->mlxwin, 2, 1L, han_inp_press, ori);
