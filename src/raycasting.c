@@ -6,13 +6,13 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 10:34:44 by ramzerk           #+#    #+#             */
-/*   Updated: 2024/11/05 18:14:34 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/06 15:18:04 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 #include <math.h>
-
+#define WALL_MARGIN  100.0
 void	ft_display_pixel(t_pixel *pixel, int x, int y, int color)
 {
 	char	*dst;
@@ -126,9 +126,9 @@ int	inputs(t_cube *cube)
 	return (0);
 }
 
-void	rotate_player(t_cube *cube, int i) // rotate the player
+void	rotate_player(t_cube *cube, int i)
 {
-	cube->player.angle += ROTATION_SPEED * i; // rotate right
+	cube->player.angle += ROTATION_SPEED * i;
 	cube->player.angle = wrap_angle(cube->player.angle);
 }
 
@@ -140,70 +140,33 @@ void	move_player(t_cube *cube, double angle)
 	double	new_y;
 
 	new_x = (cube->player.plyr_x + cos(angle));
-	// get the new x position
-	// printf("x is %d\n",cube->player.plyr_x );
 	new_y = (cube->player.plyr_y + sin(angle));
-	// get the new y position
 	map_grid_x = ((int)new_x / TILE_SIZE);
-	// get the x position in the map
 	map_grid_y = ((int)new_y / TILE_SIZE);
-	// get the y position in the map
-	// printf("y: %d, char: %s\n", map_grid_y, cube->map.map2d[1]);
 	if (cube->map.map2d[map_grid_y][map_grid_x] != '1'
 		&& (cube->map.map2d[map_grid_y][(int)cube->player.plyr_x
 			/ TILE_SIZE] != '1' && cube->map.map2d[(int)cube->player.plyr_y
 			/ TILE_SIZE][map_grid_x] != '1'))
-	// check the wall hit and the diagonal wall hit
 	{
-		cube->player.plyr_x = new_x; // move the player
-		cube->player.plyr_y = new_y; // move the player
+		cube->player.plyr_x = new_x;
+		cube->player.plyr_y = new_y;
 	}
 }
 
-void	hook(t_cube *cube, double move_x, double move_y)
-// hook the player
+void	ft_mlx_pixel_put(t_cube *cube, int x, int y, int color)
 {
-	rotate_player(cube, cube->player.rot);
-	if (cube->player.l_r == 1) // move right
-	{
-		move_x = -sin(cube->player.angle) * PLAYER_SPEED;
-		move_y = cos(cube->player.angle) * PLAYER_SPEED;
-	}
-	if (cube->player.l_r == -1) // move left
-	{
-		move_x = sin(cube->player.angle) * PLAYER_SPEED;
-		move_y = -cos(cube->player.angle) * PLAYER_SPEED;
-	}
-	if (cube->player.u_d == 1) // move up
-	{
-		move_x = cos(cube->player.angle) * PLAYER_SPEED;
-		move_y = sin(cube->player.angle) * PLAYER_SPEED;
-	}
-	if (cube->player.u_d == -1) // move down
-	{
-		move_x = -cos(cube->player.angle) * PLAYER_SPEED;
-		move_y = -sin(cube->player.angle) * PLAYER_SPEED;
-	}
-	// move_player(cube, move_x, move_y); // move the player
-}
-
-void	my_mlx_pixel_put(t_cube *cube, int x, int y, int color)
-// put the pixel
-{
-	if (x < 0) // check the x position
+	if (x < 0)
 		return ;
-	else if (x >= S_W)
+	else if (x >= SCREEN_WIDTH)
 		return ;
-	if (y < 0) // check the y position
+	if (y < 0)
 		return ;
-	else if (y >= S_H)
+	else if (y >= SCREEN_HEIGHT)
 		return ;
 	ft_display_pixel(&cube->image, x, y, color);
-	// mlx_pixel_put(cube->mlx, cube->win, x, y, color);
-	// put the pixel
 }
 
-float	nor_angle(float angle) // normalize the angle
+float	nor_angle(float angle)
 {
 	if (angle < 0)
 		angle += (2 * M_PI);
@@ -213,46 +176,44 @@ float	nor_angle(float angle) // normalize the angle
 }
 
 void	draw_floor_ceiling(t_cube *cube, int ray, int t_pix, int b_pix)
-// draw the floor and the ceiling
 {
-	int i;
+	int	i;
 
 	i = b_pix;
-	while (i < S_H)
-		my_mlx_pixel_put(cube, ray, i++, BLUE_PIXEL); // floor
+	while (i < SCREEN_HEIGHT)
+		ft_mlx_pixel_put(cube, ray, i++, BLUE_PIXEL);
 	i = 0;
 	while (i < t_pix)
-		my_mlx_pixel_put(cube, ray, i++, 0x799623); // ceiling
+		ft_mlx_pixel_put(cube, ray, i++, 0x799623);
 }
 
-int	get_color(t_cube *cube, int flag) // get the color of the wall
+int	get_color(t_cube *cube, int flag)
 {
 	cube->ray.ray_ngl = nor_angle(cube->ray.ray_ngl);
 	// normalize the angle
 	if (flag == 0)
 	{
 		if (cube->ray.ray_ngl > M_PI / 2 && cube->ray.ray_ngl < 3 * (M_PI / 2))
-			return (0xAA99CC); // west wall
+			return (WEST_WALL);
 		else
-			return (0xCCAA99); // east wall
+			return (EAST_WALL);
 	}
 	else
 	{
 		if (cube->ray.ray_ngl > 0 && cube->ray.ray_ngl < M_PI)
-			return (0x99CCAA); // south wall
+			return (SOUTH_WALL);
 		else
-			return (0x5645A0); // north wall
+			return (NORTH_WALL);
 	}
 }
 
 void	draw_wall(t_cube *cube, int ray, int t_pix, int b_pix)
-// draw the wall
 {
-	int color;
+	int	color;
 
 	color = get_color(cube, cube->ray.flag);
 	while (t_pix < b_pix)
-		my_mlx_pixel_put(cube, ray, t_pix++, color);
+		ft_mlx_pixel_put(cube, ray, t_pix++, color);
 }
 
 void	render_wall(t_cube *cube, int ray) // render the wall
@@ -261,17 +222,16 @@ void	render_wall(t_cube *cube, int ray) // render the wall
 	double b_pix;
 	double t_pix;
 
-	cube->ray.distance *= cos(nor_angle(cube->ray.ray_ngl
-				- cube->player.angle));           // fix the fisheye
-	wall_h = (TILE_SIZE / cube->ray.distance) * ((S_W / 2)
+	cube->ray.distance *= cos(nor_angle(cube->ray.ray_ngl- cube->player.angle));                    // fix the fisheye
+	wall_h = (TILE_SIZE / cube->ray.distance) * ((SCREEN_WIDTH / 2)
 			/ tan(cube->player.fov_rd / 2)); // get the wall height
-	b_pix = (S_H / 2) + (wall_h / 2);
+	b_pix = (SCREEN_HEIGHT / 2) + (wall_h / 2);
 	// get the bottom pixel
-	t_pix = (S_H / 2) - (wall_h / 2);
+	t_pix = (SCREEN_HEIGHT / 2) - (wall_h / 2);
 	// get the top pixel
-	if (b_pix > S_H)
+	if (b_pix > SCREEN_HEIGHT)
 		// check the bottom pixel
-		b_pix = S_H;
+		b_pix = SCREEN_HEIGHT;
 	if (t_pix < 0) // check the top pixel
 		t_pix = 0;
 	draw_wall(cube, ray, t_pix, b_pix); // draw the wall
@@ -294,9 +254,10 @@ int	unit_circle(float angle, char c) // check the unit circle
 	return (0);
 }
 
-int	inter_check(float angle, float *inter, float *step, int is_horizon)
+int	inter_check(float angle, float *inter, float *step,
+		int iSCREEN_HEIGHTorizon)
 {
-	if (is_horizon)
+	if (iSCREEN_HEIGHTorizon)
 	{
 		if (angle > 0 && angle < M_PI)
 		{
@@ -317,10 +278,10 @@ int	inter_check(float angle, float *inter, float *step, int is_horizon)
 	return (1);
 }
 
-int	wall_hit(float x, float y, t_cube *cube) // check the wall hit
+int	wall_hit(float x, float y, t_cube *cube)
 {
-	int x_m;
-	int y_m;
+	int	x_m;
+	int	y_m;
 
 	if (x < 0 || y < 0)
 		return (0);
@@ -334,7 +295,7 @@ int	wall_hit(float x, float y, t_cube *cube) // check the wall hit
 	return (1);
 }
 
-float	get_h_inter(t_cube *cube, float angl)
+float	get_horizontal_intersection(t_cube *cube, float angl)
 // get the horizontal intersection
 {
 	float h_x;
@@ -361,14 +322,13 @@ float	get_h_inter(t_cube *cube, float angl)
 				- cube->player.plyr_y, 2))); // get the distance
 }
 
-float	get_v_inter(t_cube *cube, float angl)
-// get the vertical intersection
+float	get_vertical_intersection(t_cube *cube, float angl)
 {
-	float v_x;
-	float v_y;
-	float x_step;
-	float y_step;
-	int pixel;
+	float	v_x;
+	float	v_y;
+	float	x_step;
+	float	y_step;
+	int		pixel;
 
 	x_step = TILE_SIZE;
 	y_step = TILE_SIZE * tan(angl);
@@ -390,7 +350,7 @@ float	get_v_inter(t_cube *cube, float angl)
 				- cube->player.plyr_y, 2))); // get the distance
 }
 
-void	cast_rays(t_cube *cube) // cast the rays
+void	cast_rays(t_cube *cube)
 {
 	double h_inter;
 	double v_inter;
@@ -399,14 +359,15 @@ void	cast_rays(t_cube *cube) // cast the rays
 	ray = 0;
 	cube->ray.ray_ngl = cube->player.angle - (cube->player.fov_rd / 2);
 	// the start angle
-	while (ray < S_W)
+	while (ray < SCREEN_WIDTH)
 	// loop for the rays
 	{
 		cube->ray.flag = 0;
 		// flag for the wall
-		h_inter = get_h_inter(cube, nor_angle(cube->ray.ray_ngl));
+		h_inter = get_horizontal_intersection(cube,
+				nor_angle(cube->ray.ray_ngl));
 		// get the horizontal intersection
-		v_inter = get_v_inter(cube, nor_angle(cube->ray.ray_ngl));
+		v_inter = get_vertical_intersection(cube, nor_angle(cube->ray.ray_ngl));
 		// get the vertical intersection
 		if (v_inter <= h_inter)
 			// check the distance
@@ -421,7 +382,7 @@ void	cast_rays(t_cube *cube) // cast the rays
 		// render the wall
 		ray++;
 		// next ray
-		cube->ray.ray_ngl += (cube->player.fov_rd / S_W);
+		cube->ray.ray_ngl += (cube->player.fov_rd / SCREEN_WIDTH);
 		// next angle
 	}
 }
