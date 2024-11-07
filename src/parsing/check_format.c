@@ -6,17 +6,24 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 15:50:18 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/07 18:30:08 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/07 19:17:26 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-int	check_extension(char *cub)
+int	ft_strncmp(char *s1, char *s2, int n)
 {
-	if (ft_strstr(cub, ".cub"))
+	int	i;
+
+	if (!n)
 		return (0);
-	return (1);
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i] && i < n)
+		i++;
+	if (i == n)
+		return (0);
+	return (s1[i] - s2[i]);
 }
 
 int	nb_ligne(char *file)
@@ -41,16 +48,7 @@ int	nb_ligne(char *file)
 	return (i);
 }
 
-int	remove_space(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (ft_isspace(str[i]))
-		i++;
-	return (0);
-}
-int	check_xpm(char *line)
+int	check_extension(char *line, char *extension)
 {
 	int	i;
 
@@ -62,23 +60,41 @@ int	check_xpm(char *line)
 	i -= 4;
 	while (line[i])
 	{
-		if (line[i] != ".xpm"[i])
+		if (line[i] != extension[i])
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-int	get_path(t_cube *cube, char *line, char **way)
+int	get_path(t_cube *cube, char *line, void **way)
 {
 	int	x;
 	int	y;
 
-	if (!check_xpm(line))
+	if (!check_extension(line, ".xpm"))
 		return (0);
 	*way = mlx_xpm_file_to_image(cube->mlx, line, &x, &y);
 	if (!*way)
 		return (0);
+	return (1);
+}
+
+int	get_rdb(t_cube *cube, char *line, int *way)
+{
+	char	**color;
+	char hexa;
+	color = ft_split(line + 3, ',');
+	char *res = ft_strdup("0x");
+	char_to_hexa(color[0]);
+	char_to_hexa(color[1]);
+	char_to_hexa(color[2]);
+	ft_strjoin4(res, color[0], color[1], color[2]);
+	atoi_base(res);
+	way = res;
+	free(res);
+	free(color);
+	free(hexa);
 	return (1);
 }
 
@@ -87,37 +103,37 @@ int	get_info(t_cube *cube, char *line)
 	if (!ft_strncmp(line, "NO ", 3))
 	{
 		if (!get_path(cube, line, &cube->texture.north))
-			return (printf("Map error\n", 0));
+			return (printf("Map error\n"), 0);
 		return (1);
 	}
 	if (!ft_strncmp(line, "SO ", 3))
 	{
 		if (!get_path(cube, line, &cube->texture.south))
-			return (printf("Map error\n", 0));
+			return (printf("Map error\n"), 0);
 		return (1);
 	}
 	if (!ft_strncmp(line, "EA ", 3))
 	{
 		if (!get_path(cube, line, &cube->texture.east))
-			return (printf("Map error\n", 0));
+			return (printf("Map error\n"), 0);
 		return (1);
 	}
 	if (!ft_strncmp(line, "WE ", 3))
 	{
 		if (!get_path(cube, line, &cube->texture.west))
-			return (printf("Map error\n", 0));
+			return (printf("Map error\n"), 0);
 		return (1);
 	}
 	if (!ft_strncmp(line, "C ", 2))
 	{
-		if (!get_path(cube, line, &cube->texture.ceiling))
-			return (printf("Map error\n", 0));
+		if (!get_rgb(cube, line, &cube->texture.ceiling))
+			return (printf("Map error\n"), 0);
 		return (1);
 	}
 	if (!ft_strncmp(line, "F ", 2))
 	{
-		if (!get_path(cube, line, &cube->texture.floor))
-			return (printf("Map error\n", 0));
+		if (!get_rgb(cube, line, &cube->texture.floor))
+			return (printf("Map error\n"), 0);
 		return (1);
 	}
 	return (0);
@@ -127,36 +143,33 @@ int	read_cub(t_cube *cube)
 {
 	char	*line;
 	int		c;
+	int		i;
+	int		j;
 
 	c = 0;
-	// int		i;
-	// int		j;
-	if (!check_extension(cube->av[2]))
+	if (!check_extension(cube->av[1]))
 		return (ft_putstr_fd("Error\nWrong file extension\n", 1), 0);
-	// i = 0;
-	// j = nb_ligne(cube->av[2]);
+	i = 0;
+	j = nb_ligne(cube->av[2]);
 	cube->fd = open(cube->av[2], O_RDONLY, 0664);
-	// cube->map = ft_calloc(j + 1, sizeof(char *));
+	cube->tab_map = ft_calloc(j + 1, sizeof(char *));
 	while (1)
 	{
 		line = get_next_line(cube->fd);
 		c++;
 		if (!line)
 			break ;
-		if (!get_info(cube, line))
-			return (0);
-		if (c < 8)
+		if (get_info(cube, line) && c < 8)
+			continue ;
+		if (c < 9)
 		{
 			free(line);
 			continue ;
 		}
-		if (strchr(line, '1') == 0)
-			break ;
+		cube->tab_map[++i] = ft_strdup(line);
 		free(line);
 		c++;
 	}
-	// if (!init_init(cube))
-	// 	return (0);
 	return (1);
 }
 int	is_map_valid(t_cube *m)

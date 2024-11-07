@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:29:06 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/07 17:05:10 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/07 19:05:22 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 bool	parsing(t_cube *cube, char **av)
 {
-	if (!init_argument(cube, av))
-		return (0);
+	cube->av = av;
+	// if (!init_argument(cube, av))
+	// 	return (0);
 	if (!read_cub(cube))
 		return (0);
 	// if (!map_valid(cube))
@@ -29,11 +30,12 @@ bool	parsing(t_cube *cube, char **av)
 	return (1);
 }
 
-int	is_validmap(t_cube *map)
-{
-	(void)map;
-	return (1);
-}
+// int	is_validmap(t_cube *map)
+// {
+// 	char ** map;
+	
+// 	return (1);
+// }
 
 int	game_loop(t_cube *cube)
 {
@@ -54,7 +56,7 @@ int	init_the_player(t_cube *cube)
 
 int	init_argument(t_cube *cube, char **av)
 {
-	cube->av = av;
+	(void)av;
 	cube->map.map2d = calloc(10, sizeof(char *));
 	cube->map.map2d[0] = strdup("1111111111111111111111111");
 	cube->map.map2d[1] = strdup("1000000000000000000100001");
