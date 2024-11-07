@@ -5,14 +5,20 @@ SRC_DIR		=			src
 OBJ_DIR		=			obj
 
 SRC_FILES	=			main.c 							\
-						minilibx.c						\
-						raycasting.c 					\
-						clean.c 						\
-						libft_portable.c 				\
-					#	parsing/parsing.c 				\
+						parsing/parsing.c 				\
 						parsing/check_letter.c			\
 						parsing/check_format.c			\
-						parsing/get_next_line.c
+						parsing/get_next_line.c			\
+						exec/exec.c 					\
+					 	exec/key_log.c					\
+						exec/minilibx.c					\
+						exec/radian.c					\
+						exec/draw.c						\
+						exec/calculus.c					\
+						exec/display.c					\
+						lib/libft_portable.c 			\
+						lib/clean.c 					\
+						lib/string.c 					\
 
 CC			=			cc
 CFLAGS 		=			-ffast-math -Wall -Wextra -Werror -g3 -Iinc
@@ -44,7 +50,7 @@ re: 					fclean all
 mac: 					$(NAME_MAC)
 
 $(NAME): 				$(OBJS) $(LIBX) $(LIBFT)
-						@$(CC) $(CFLAGS) $(MLX_FLAG) $^ -o $@ -lm
+						$(CC) $(CFLAGS) $(MLX_FLAG) $^ -o $@ -lm
 
 $(NAME_MAC): 			$(OBJS) $(LIBX_MAC) $(LIBFT)
 						$(CC) $(CFLAGS)  $(MAC_FLAG) $(MLX_FLAG)  $^ -o $@ -lm
@@ -54,6 +60,7 @@ $(LIBX_MAC):
 
 $(LIBX):
 						@make -C minilibx-linux/
+
 
 clean:
 						rm -rf $(OBJ_DIR)
