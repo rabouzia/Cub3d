@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:21:18 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/07 13:48:01 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/07 13:57:10 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int ac, char **av)
 }
 /*
 	TODO freeing
-		- look for leaks	
+		- look for leaks	sa
 	TODO parsing:
 		- parse everything
 	TODO map:

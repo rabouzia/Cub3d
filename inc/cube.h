@@ -219,7 +219,7 @@ char			*get_next_line(int fd);
 
 void			*ft_calloc(size_t n, size_t s);
 
-//############ clean ########################
+	//############ clean ########################
 
 int				quit_click(t_cube *d);
 
