@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:21:18 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/06 15:28:48 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/07 08:36:07 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,15 @@ void	ft_exit(t_cube *cube)
 	(void)cube;
 	// int	i = 0;
 	// while (cube->map.map2d[i])
-	// // 	free(cube->map.map2d[i++]); // free the map line by line
-	// free(cube->map.map2d); // free the map
-	// free(cube.map); // free the data structure
-	// free(cube->ply); // free the player structure
-	// free(cube->ray); // free the ray structure
+	// 	free(cube->map.map2d[i++]);
+	// free(cube->map.map2d);
+	// free(cube.map);
+	// free(cube->ply);
+	// free(cube->ray);
 	// mlx_destroy_image(mlx->mlx_p, mlx->img);
-	// mlx_close_window(mlx->win); // close the window
-	// mlx_terminate(mlx->mlx_p); // terminate the mlx pointer
-	printf("Game closed\n"); // print the message
-	exit(0);                 // exit the game
+	// mlx_close_window(mlx->win);
+	// mlx_terminate(mlx->mlx_p);
+	exit(0);              
 }
 
 int	game_loop(t_cube *cube)
@@ -47,20 +46,6 @@ void	init_the_player(t_cube *cube)
 
 int	start_the_game(t_cube *cube)
 {
-	int	a;
-
-	a = 500;
-	cube->mlx = mlx_init();
-	if (!cube->mlx)
-		exit(1); // todo add ft_escape function
-	cube->win = mlx_new_window(cube->mlx, 1920, 1080, "Cube 3D");
-	cube->pixel.img = mlx_xpm_file_to_image(cube->mlx,
-			"/home/rabouzia/Cub3d/src/wall.xpm", &a, &a);
-	cube->pixel.addr = mlx_get_data_addr(cube->pixel.img, &cube->pixel.bpp,
-			&cube->pixel.line_len, &cube->pixel.endian);
-	cube->image.img = mlx_new_image(cube->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
-	cube->image.addr = mlx_get_data_addr(cube->image.img, &cube->image.bpp,
-			&cube->image.line_len, &cube->image.endian);
 	init_the_player(cube);
 	mlx_hook(cube->win, 2, 1l << 0, &key_press, cube);
 	mlx_hook(cube->win, 3, 1l << 1, &key_release, cube);
@@ -88,8 +73,9 @@ void	init_argumet(t_map_info *map)
 	map->h_map = 9;
 }
 
-void	init_all(t_cube *cube)
+void	init_all(t_cube *cube, char **av)
 {
+	cube->av = av;
 	cube->map.p_x = 0;
 	cube->map.p_y = 0;
 	cube->map.w_map = 0;
@@ -116,41 +102,35 @@ void	init_all(t_cube *cube)
 	cube->tab_map = NULL;
 }
 
-int	main(void)
+int	main(int ac , char **av)
 {
 	t_cube	cube;
 
+	if(ac != 2)
+		return (printf("Use a map in map/\n"), 0);
 	memset(&cube, 0, sizeof(t_cube));
-	init_all(&cube);
+	init_all(&cube, av + 1);
 	init_argumet(&cube.map);
-	start_the_game(&cube);
-	return (0);
-	// int	main(int ac, char **av)
-	// {
-	// 	t_game	game;
-	// 	(void)ac;
-	// 	(void)av;
-	// 	game = (t_game){0};
-	// 	if (!minilibx(&game))
-	// 		return (0);
+	// if (!parsing(&cube))
+	// 	return 0;
+	if (!minilibx(&cube))
+		return (0);
+	if (!&raycasting)
+		return 0;
+	ft_exit(&cube);
+	// start_the_game(&cube);
 	// if (!raycasting(&game))
 	// 	return (0);
 	//
 }
 /*
+	TODO parsing:
+		- parse everything
+	
 
-	TODO texture:
-	- find texture for the wall, ceiling and floor
-	- be able to change the texture
-	TODO controls:
-	- left and right arrow for the camera
-	- WASD to move
 	TODO map:
 	- must be 1 0 W D S E W
 	- must be close (0 not surround by anything but P or 1)
 	-
-
-	TODO pixel:
-	-	refaire mlx put pixel
 
 	*/
