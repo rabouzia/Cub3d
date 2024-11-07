@@ -1,5 +1,5 @@
-NO ./textures/simple_wall.xpm
-SO ./textures/simple_wall.xpm
+                   NO ./textures/simple_wall.xpm
+SO ./textures/NO.xpm
 WE ./textures/simple_wall.xpm
 EA ./textures/simple_wall.xpm
 

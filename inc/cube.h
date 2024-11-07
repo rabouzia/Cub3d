@@ -48,12 +48,6 @@
 # define NORTH_WALL 0x5645A0
 # define SOUTH_WALL 0x99CCAA
 
-typedef struct s_pos
-{
-	int			x;
-	int			y;
-}				t_pos;
-
 typedef struct s_pixel
 {
 	void		*img;
@@ -81,6 +75,16 @@ typedef struct s_ray
 	int			flag;
 }				t_ray;
 
+typedef struct s_texture
+{
+	void		*north;
+	void		*south;
+	void		*west;
+	void		*east;
+	int			floor;
+	int			ceiling;
+}				t_texture;
+
 typedef struct s_map_info
 {
 	char		**map2d;
@@ -103,6 +107,7 @@ typedef struct s_cube
 	t_map_info	map;
 	t_ray		ray;
 	t_player	player;
+	t_texture	texture;
 }				t_cube;
 
 //############ parsing ####################
@@ -219,7 +224,7 @@ char			*get_next_line(int fd);
 
 void			*ft_calloc(size_t n, size_t s);
 
-	//############ clean ########################
+//############ clean ########################
 
 int				quit_click(t_cube *d);
 

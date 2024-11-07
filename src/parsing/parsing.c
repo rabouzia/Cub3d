@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:29:06 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/07 13:56:39 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/07 17:05:10 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ bool	parsing(t_cube *cube, char **av)
 {
 	if (!init_argument(cube, av))
 		return (0);
+	if (!read_cub(cube))
+		return (0);
 	// if (!map_valid(cube))
 	// 	return (0);
 	// if (!letter_check(cube))
-	// 	return (0);
-	// if (!read_cub(cube))
 	// 	return (0);
 	// if (!is_validmap(cube))
 	// 	return (0);
@@ -38,10 +38,8 @@ int	is_validmap(t_cube *map)
 int	game_loop(t_cube *cube)
 {
 	cast(cube);
-	if(!mlx_put_image_to_window(cube->mlx, cube->win, cube->image.img, 0, 0))
-		return 0;	
-	if(!inputs(cube))
-		return 0;
+	mlx_put_image_to_window(cube->mlx, cube->win, cube->image.img, 0, 0);
+	inputs(cube);
 	return (0);
 }
 
