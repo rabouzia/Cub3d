@@ -27,6 +27,10 @@ OBJ_SUBDIRS	=			$(sort $(dir $(OBJS)))
 
 MAKE_DIR	=			mkdir -p
 
+MLX_FLAG	= 			-lX11 -lXext -lmlx -Lminilibx-linux/
+
+MAC_FLAG 	=			 -L/opt/homebrew/Cellar/libxext/1.3.6/lib  -L/opt/homebrew/Cellar/libx11/1.8.10/lib  
+
 $(OBJ_DIR)/%.o: 		$(SRC_DIR)/%.c
 						$(MAKE_DIR) $(dir $@)
 						$(CC) $(CFLAGS) -c $< -o $@
@@ -40,13 +44,10 @@ re: 					fclean all
 mac: 					$(NAME_MAC)
 
 $(NAME): 				$(OBJS) $(LIBX) $(LIBFT)
-						@$(CC) $(CFLAGS) -lXext -lX11 -Lminilibx-linux/ -lmlx $^ -o $@ -lm
+						@$(CC) $(CFLAGS) $(MLX_FLAG) $^ -o $@ -lm
 
 $(NAME_MAC): 			$(OBJS) $(LIBX_MAC) $(LIBFT)
-						$(CC) $(CFLAGS) -L/opt/homebrew/Cellar/libxext/1.3.6/lib -lXext -L/opt/homebrew/Cellar/libx11/1.8.10/lib -lX11 -Lminilibx-linux/ -lmlx $^ -o $@
-
-debug: 					$(OBJS) $(LIBX) $(LIBFT)
-						$(CC) $(CFLAGS) -g3 -gdwarf-4 -L/opt/homebrew/Cellar/libxext/1.3.6/lib -lXext -L/opt/homebrew/Cellar/libx11/1.8.10/lib -lX11 -Lminilibx-linux/ -lmlx $^ -o $(NAME)_debug
+						$(CC) $(CFLAGS)  $(MAC_FLAG) $(MLX_FLAG)  $^ -o $@ -lm
 
 $(LIBX_MAC):
 						@make -C minilibx-linux/
