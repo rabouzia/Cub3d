@@ -6,11 +6,126 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 15:50:18 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/07 19:17:26 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/08 00:52:45 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
+
+void	free_tab(char **tab)
+{
+	int	i;
+
+	if (!tab)
+		return ;
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}
+
+static int	word_count(char const *s, char c)
+{
+	int	count;
+	int	on_word;
+
+	count = 0;
+	on_word = 0;
+	while (*s)
+	{
+		if (*s == c)
+		{
+			if (on_word)
+			{
+				count++;
+				on_word = 0;
+			}
+		}
+		else
+			on_word = 1;
+		s++;
+	}
+	return (count + on_word);
+}
+
+static char	*copy_next_word(char const *s, char c, int *i)
+{
+	char	*word;
+	int		tmp;
+	int		j;
+
+	while (s[*i] && s[*i] == c)
+		(*i)++;
+	tmp = *i;
+	while (s[*i] && s[*i] != c)
+		(*i)++;
+	word = malloc((*i - tmp + 1) * sizeof(char));
+	if (!word)
+		return (NULL);
+	j = 0;
+	while (j < *i - tmp)
+	{
+		word[j] = s[tmp + j];
+		j++;
+	}
+	word[j] = '\0';
+	return (word);
+}
+char	*ft_strjoin_4(char *s1, char *s2, char *s3, char *s4)
+{
+	int		i;
+	char	*join;
+
+	if (!s1 || !s2 || !s3 || !s4)
+		return (NULL);
+	join = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + ft_strlen(s3)
+				+ ft_strlen(s4) + 1));
+	if (!join)
+		return (NULL);
+	i = -1;
+	while (s1[++i])
+		join[i] = s1[i];
+	i--;
+	while (s2[++i - ft_strlen(s1)])
+		join[i] = s2[i - ft_strlen(s1)];
+	i--;
+	while (s3[++i - ft_strlen(s1) - ft_strlen(s2)])
+		join[i] = s3[i - ft_strlen(s1) - ft_strlen(s2)];
+	i--;
+	while (s4[++i - ft_strlen(s1) - ft_strlen(s2) - ft_strlen(s3)])
+		join[i] = s4[i - ft_strlen(s1) - ft_strlen(s2) - ft_strlen(s3)];
+	join[i] = 0;
+	return (join);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**split;
+	int		words;
+	int		word;
+	int		i;
+
+	if (!s)
+		return (NULL);
+	words = word_count(s, c);
+	split = malloc((words + 1) * sizeof(char *));
+	if (!split)
+		return (NULL);
+	i = 0;
+	word = 0;
+	while (word < words)
+	{
+		split[word] = copy_next_word(s, c, &i);
+		if (!split[word])
+			return (free_tab(split), NULL);
+		word++;
+	}
+	split[words] = NULL;
+	return (split);
+}
 
 int	ft_strncmp(char *s1, char *s2, int n)
 {
@@ -45,26 +160,22 @@ int	nb_ligne(char *file)
 		i++;
 	}
 	close(fd);
-	return (i);
+	return (i - 8);
 }
 
 int	check_extension(char *line, char *extension)
 {
 	int	i;
+	int	ex_len;
 
+	ex_len = ft_strlen(extension);
 	i = 0;
 	while (line[i])
 		i++;
-	if (i < 5)
+	if (i < ex_len + 1)
 		return (0);
-	i -= 4;
-	while (line[i])
-	{
-		if (line[i] != extension[i])
-			return (0);
-		i++;
-	}
-	return (1);
+	i -= ex_len;
+	return (!strncmp(&line[i], extension, ex_len));
 }
 
 int	get_path(t_cube *cube, char *line, void **way)
@@ -80,21 +191,43 @@ int	get_path(t_cube *cube, char *line, void **way)
 	return (1);
 }
 
-int	get_rdb(t_cube *cube, char *line, int *way)
+int	ft_atoi(const char *str)
 {
-	char	**color;
-	char hexa;
+	int	i;
+	int	n;
+
+	i = 0;
+	n = 0;
+	if (!str)
+		return (-1);
+	if (str[i] == '-')
+		return (-1);
+	while (str[i] >= 48 && str[i] <= 57)
+	{
+		n = n * 10 + (str[i] - 48);
+		i++;
+	}
+	if (n > 255 || n < 0)
+		return (-1);
+	return (n);
+}
+
+int	get_rgb(t_cube *cube, char *line, unsigned int *way)
+{
+	char			**color;
+	unsigned int	res;
+	int				rgb[3];
+
+	(void)cube;
 	color = ft_split(line + 3, ',');
-	char *res = ft_strdup("0x");
-	char_to_hexa(color[0]);
-	char_to_hexa(color[1]);
-	char_to_hexa(color[2]);
-	ft_strjoin4(res, color[0], color[1], color[2]);
-	atoi_base(res);
-	way = res;
-	free(res);
-	free(color);
-	free(hexa);
+	rgb[0] = ft_atoi(color[0]);
+	rgb[1] = ft_atoi(color[1]);
+	rgb[2] = ft_atoi(color[2]);
+	if (rgb[0] == -1 || rgb[1] == -1 || rgb[2] == -1)
+		return (0);
+	res = rgb[0] * 256 * 256 + rgb[1] * 256 + rgb[2];
+	*way = res;
+	free_tab(color);
 	return (1);
 }
 
@@ -147,28 +280,29 @@ int	read_cub(t_cube *cube)
 	int		j;
 
 	c = 0;
-	if (!check_extension(cube->av[1]))
+	if (!check_extension(cube->av[1], ".cub"))
 		return (ft_putstr_fd("Error\nWrong file extension\n", 1), 0);
 	i = 0;
-	j = nb_ligne(cube->av[2]);
-	cube->fd = open(cube->av[2], O_RDONLY, 0664);
-	cube->tab_map = ft_calloc(j + 1, sizeof(char *));
+	j = nb_ligne(cube->av[1]);
+	cube->fd = open(cube->av[1], O_RDONLY, 0664);
+	cube->map.map2d = ft_calloc(j + 1, sizeof(char *));
 	while (1)
 	{
 		line = get_next_line(cube->fd);
 		c++;
 		if (!line)
 			break ;
-		if (get_info(cube, line) && c < 8)
+		if (get_info(cube, line) && c < 6)
+		// check if the info are all picked and pass to next only if they are in 
 			continue ;
-		if (c < 9)
+		if (c < 7)
 		{
 			free(line);
 			continue ;
 		}
-		cube->tab_map[++i] = ft_strdup(line);
+		cube->map.map2d[i] = ft_strdup(line);
 		free(line);
-		c++;
+		i++;
 	}
 	return (1);
 }

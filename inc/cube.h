@@ -2,6 +2,7 @@
 # define CUBE_H
 
 # include "../minilibx-linux/mlx.h"
+# include "get_next_line.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <fcntl.h>
@@ -50,186 +51,184 @@
 
 typedef struct s_pixel
 {
-	void		*img;
-	char		*addr;
-	int			bpp;
-	int			line_len;
-	int			endian;
-}				t_pixel;
+	void			*img;
+	char			*addr;
+	int				bpp;
+	int				line_len;
+	int				endian;
+}					t_pixel;
 
 typedef struct s_player
 {
-	double		plyr_x;
-	double		plyr_y;
-	double		angle;
-	float		fov_rd;
-	int			rot;
-	int			l_r;
-	int			u_d;
-}				t_player;
+	double			plyr_x;
+	double			plyr_y;
+	double			angle;
+	float			fov_rd;
+	int				rot;
+	int				l_r;
+	int				u_d;
+}					t_player;
 
 typedef struct s_ray
 {
-	double		ray_ngl;
-	double		distance;
-	int			flag;
-}				t_ray;
+	double			ray_ngl;
+	double			distance;
+	int				flag;
+}					t_ray;
 
 typedef struct s_texture
 {
-	void		*north;
-	void		*south;
-	void		*west;
-	void		*east;
-	int			floor;
-	int			ceiling;
-}				t_texture;
+	void			*north;
+	void			*south;
+	void			*west;
+	void			*east;
+	unsigned int	floor;
+	unsigned int	ceiling;
+}					t_texture;
 
 typedef struct s_map_info
 {
-	char		**map2d;
-	int			p_x;
-	int			p_y;
-	int			w_map;
-	int			h_map;
-}				t_map_info;
+	char			**map2d;
+	int				p_x;
+	int				p_y;
+	int				w_map;
+	int				h_map;
+}					t_map_info;
 
 typedef struct s_cube
 {
-	char		**tab_map;
-	int			fd;
-	char		**av;
-	void		*mlx;
-	void		*win;
-	bool		inputs[128];
-	t_pixel		pixel;
-	t_pixel		image;
-	t_map_info	map;
-	t_ray		ray;
-	t_player	player;
-	t_texture	texture;
-}				t_cube;
+	char			**tab_map;
+	int				fd;
+	char			**av;
+	void			*mlx;
+	void			*win;
+	bool			inputs[128];
+	t_pixel			pixel;
+	t_pixel			image;
+	t_map_info		map;
+	t_ray			ray;
+	t_player		player;
+	t_texture		texture;
+}					t_cube;
 
 //############ parsing ####################
 
-bool			parsing(t_cube *cube, char **av);
+bool				parsing(t_cube *cube, char **av);
 
-int				read_cub(t_cube *data);
+int					read_cub(t_cube *data);
 
-int				letter_check(t_cube *m);
+int					letter_check(t_cube *map);
 
-int				is_good(char c);
+int					is_good(char c);
 
-bool			find_direction(char c, int i, int j, t_cube *cube);
+bool				find_direction(char c, int i, int j, t_cube *cube);
 
-int				setup_win(t_cube *cube);
+int					setup_win(t_cube *cube);
 
-int				init_argument(t_cube *cube, char **av);
+int					init_argument(t_cube *cube, char **av);
 
 //############ minilibx #####################
 
-bool			win_create(t_cube *cube);
+bool				win_create(t_cube *cube);
 
-bool			minilibx(t_cube *cube);
+bool				minilibx(t_cube *cube);
 
 //############ key log ##################
 
-int				key_press(int key, t_cube *cube);
+int					key_press(int key, t_cube *cube);
 
-int				key_release(int key, t_cube *cube);
+int					key_release(int key, t_cube *cube);
 
-int				inputs(t_cube *cube);
+int					inputs(t_cube *cube);
 
-double			wrap_angle(double angle);
+double				wrap_angle(double angle);
 
 //############ draw ##################
 
-void			draw_floor_ceiling(t_cube *cube, int ray, int top_pix,
-					int bottom_pix);
+void				draw_floor_ceiling(t_cube *cube, int ray, int top_pix,
+						int bottom_pix);
 
-int				get_color(t_cube *cube, int flag);
+int					get_color(t_cube *cube, int flag);
 
-void			draw_wall(t_cube *cube, int ray, int t_pix, int b_pix);
+void				draw_wall(t_cube *cube, int ray, int t_pix, int b_pix);
 
-void			render_wall(t_cube *cube, int ray);
+void				render_wall(t_cube *cube, int ray);
 
 //############ calculus ##################
 
-int				wall_hit(float x, float y, t_cube *cube);
+int					wall_hit(float x, float y, t_cube *cube);
 
-float			get_horizontal_intersection(t_cube *cube, float angl);
+float				get_horizontal_intersection(t_cube *cube, float angl);
 
-float			get_vertical_intersection(t_cube *cube, float angl);
+float				get_vertical_intersection(t_cube *cube, float angl);
 
 //############ display ##################
 
-void			ft_display_pixel(t_pixel *pixel, int x, int y, int color);
+void				ft_display_pixel(t_pixel *pixel, int x, int y, int color);
 
-void			ft_mlx_pixel_put(t_cube *cube, int x, int y, int color);
+void				ft_mlx_pixel_put(t_cube *cube, int x, int y, int color);
 
 //############ raycasting ##################
 
-int				inter_check(float angle, float *inter, float *step,
-					int is_inter);
+int					inter_check(float angle, float *inter, float *step,
+						int is_inter);
 
-int				unit_circle(float angle, char c);
+int					unit_circle(float angle, char c);
 
-int				game_loop(t_cube *cube);
+int					game_loop(t_cube *cube);
 
-void			render_wall(t_cube *cube, int ray);
+void				render_wall(t_cube *cube, int ray);
 
-int				raycasting(t_cube *cube);
+int					raycasting(t_cube *cube);
 
-int				init_the_player(t_cube *cube);
+int					init_the_player(t_cube *cube);
 
-void			move_player(t_cube *cube, double angle);
+void				move_player(t_cube *cube, double angle);
 
-void			rotate_player(t_cube *cube, int i);
+void				rotate_player(t_cube *cube, int i);
 
-void			cast(t_cube *cube);
+void				cast(t_cube *cube);
 
-int				key_press(int key, t_cube *cube);
+int					key_press(int key, t_cube *cube);
 
-int				key_release(int key, t_cube *cube);
+int					key_release(int key, t_cube *cube);
 
-int				inputs(t_cube *cube);
+int					inputs(t_cube *cube);
 
-int				start_the_game(t_cube *cube);
+int					start_the_game(t_cube *cube);
 
-float			get_horizontal_intersection(t_cube *cube, float angl);
+float				get_horizontal_intersection(t_cube *cube, float angl);
 
-float			get_vertical_intersection(t_cube *cube, float angl);
+float				get_vertical_intersection(t_cube *cube, float angl);
 
 //############ mini_libft ###################
 
-void			render_wall(t_cube *cube, int ray);
+void				render_wall(t_cube *cube, int ray);
 
-char			*ft_strdup(char *str);
+char				*ft_strdup(char *str);
 
-float			nor_angle(float angle);
+float				nor_angle(float angle);
 
-void			print_tab(char **tab);
+void				print_tab(char **tab);
 
-int				ft_strstr(char *str, char *to_find);
+int					ft_strstr(char *str, char *to_find);
 
-int				ft_strlen(char *str);
+int					ft_strlen(char *str);
 
-int				ft_strlcpy(char *dest, char *src, int len);
+int					ft_strlcpy(char *dest, char *src, int len);
 
-char			*ft_strjoin(char *s1, char *s2);
+char				*ft_strjoin(char *s1, char *s2);
 
-void			ft_putstr_fd(char *s, int fd);
+void				ft_putstr_fd(char *s, int fd);
 
-char			*get_next_line(int fd);
-
-void			*ft_calloc(size_t n, size_t s);
+void				*ft_calloc(size_t n, size_t s);
 
 //############ clean ########################
 
-int				quit_click(t_cube *d);
+int					quit_click(t_cube *d);
 
-void			quit_esc(t_cube *d);
+void				quit_esc(t_cube *d);
 
-void			ft_exit(t_cube *cube);
+void				ft_exit(t_cube *cube);
 
 #endif

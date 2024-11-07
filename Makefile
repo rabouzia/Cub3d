@@ -9,6 +9,7 @@ SRC_FILES	=			main.c 							\
 						parsing/check_letter.c			\
 						parsing/check_format.c			\
 						parsing/get_next_line.c			\
+						parsing/get_next_line_utils.c	\
 						exec/exec.c 					\
 					 	exec/key_log.c					\
 						exec/minilibx.c					\

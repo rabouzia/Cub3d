@@ -2,6 +2,8 @@
 	"files.associations": {
 		"cube.h": "c",
 		"strings.h": "c",
-		"mlx.h": "c"
+		"mlx.h": "c",
+		"stdio.h": "c",
+		"get_next_line.h": "c"
 	}
 }

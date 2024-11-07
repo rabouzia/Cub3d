@@ -3,77 +3,63 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/06 09:29:44 by ramzerk           #+#    #+#             */
-/*   Updated: 2024/10/06 09:35:15 by ramzerk          ###   ########.fr       */
+/*   Created: 2023/12/12 11:38:19 by rabouzia          #+#    #+#             */
+/*   Updated: 2024/11/07 23:55:37 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-static void	inplace_strjoin(char **s1, char *s2)
-{
-	char	*joined;
-
-	joined = ft_strjoin(*s1, s2);
-	free(*s1);
-	*s1 = joined;
-}
-
-static char	*get_start(char *s, size_t len)
-{
-	char	*dest;
-
-	dest = malloc(len + 1);
-	if (dest != NULL)
-		ft_strlcpy(dest, s, len + 1);
-	free(s);
-	return (dest);
-}
-
-static int	find_newline(char *s)
+void	rm_back(char *str)
 {
 	int	i;
+	int	j;
 
-	if (s != NULL)
+	i = 0;
+	while (str[i])
 	{
-		i = 0;
-		while (s[i] != '\0')
-		{
-			if (s[i] == '\n')
-				return (i);
-			++i;
-		}
+		if (str[i] == '\n')
+			break ;
+		i++;
 	}
-	return (-1);
+	i++;
+	j = 0;
+	while (str[i])
+	{
+		str[j] = str[i];
+		i++;
+		j++;
+	}
+	str[j] = '\0';
 }
 
 char	*get_next_line(int fd)
 {
-	static char	buffers[FILE_DESCRIPTORS][BUFFER_SIZE] = {0};
-	ssize_t		bytes_read;
-	int			nl_index;
-	char		*line;
+	char		*res;
+	int			lu;
+	static char	buff[BUFFER_SIZE + 1] = {};
 
-	if (fd < 0 || fd >= FILE_DESCRIPTORS || BUFFER_SIZE <= 0)
+	if (BUFFER_SIZE < 1 || fd > 1024 || fd < 0)
 		return (NULL);
-	line = ft_strdup(buffers[fd]);
-	nl_index = find_newline(line);
-	bytes_read = BUFFER_SIZE;
-	while (line != NULL && nl_index == -1 && bytes_read == BUFFER_SIZE)
+	lu = 1;
+	res = NULL;
+	if (ft_memchr(buff, '\n') != 0)
 	{
-		bytes_read = read(fd, buffers[fd], BUFFER_SIZE);
-		buffers[fd][bytes_read] = '\0';
-		inplace_strjoin(&line, buffers[fd]);
-		nl_index = find_newline(line);
+		if (ft_strlen(ft_memchr(buff, '\n') + 1) > 0)
+			res = ft_strdup(ft_memchr(buff, '\n') + 1);
+		rm_back(buff);
 	}
-	if (line == NULL || line[0] == '\0')
-		return (free(line), NULL);
-	else if (nl_index == -1)
-		return (buffers[fd][0] = '\0', line);
-	else
-		return (
-			ft_strlcpy(buffers[fd], line + nl_index + 1, INT_MAX),
-			get_start(line, nl_index + 1));
+	while (lu > 0 && (ft_strchr(res, '\n') == 0))
+	{
+		lu = read(fd, buff, BUFFER_SIZE);
+		if (lu <= 0)
+			break ;
+		buff[lu] = '\0';
+		res = for_strjoin(res, buff);
+	}
+	if (lu <= 0 && !res)
+		return (NULL);
+	return (res);
 }
