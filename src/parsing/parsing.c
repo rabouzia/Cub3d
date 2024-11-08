@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:29:06 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/08 00:44:53 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/08 19:58:01 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ bool	parsing(t_cube *cube, char **av)
 	// 	return (0);
 	if (!read_cub(cube))
 		return (0);
+	// print_tab(cube->map.map2d);
 	// if (!map_valid(cube))
 	// 	return (0);
 	if (!letter_check(cube))
@@ -39,6 +40,7 @@ bool	parsing(t_cube *cube, char **av)
 
 int	game_loop(t_cube *cube)
 {
+	// printf("x %f y %f\n", cube->player.plyr_x, cube->player.plyr_y);
 	cast(cube);
 	mlx_put_image_to_window(cube->mlx, cube->win, cube->image.img, 0, 0);
 	inputs(cube);
@@ -59,10 +61,10 @@ int	init_argument(t_cube *cube, char **av)
 	(void)av;
 	cube->map.map2d = calloc(10, sizeof(char *));
 	cube->map.map2d[0] = strdup("1111111111111111111111111");
-	cube->map.map2d[1] = strdup("1000000000000000000100001");
-	cube->map.map2d[2] = strdup("1001000000000P00000000001");
+	cube->map.map2d[1] = strdup("    110000000000000100001");
+	cube->map.map2d[2] = strdup("1111000000000S00000000001");
 	cube->map.map2d[3] = strdup("1001000000000000001000001");
-	cube->map.map2d[4] = strdup("100100000000P000001000001");
+	cube->map.map2d[4] = strdup("1001000000000000001000001");
 	cube->map.map2d[5] = strdup("1001000000100000001000001");
 	cube->map.map2d[6] = strdup("1001000000000000001000001");
 	cube->map.map2d[7] = strdup("1001000000001000001000001");

@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 15:46:19 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/08 00:45:57 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/08 20:41:40 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,28 @@ int	letter_check(t_cube *cube)
 	int	i;
 	int	j;
 
-	j = 0;
 	i = 0;
-	print_tab(cube->map.map2d);
+	// print_tab(cube->map.map2d);
+	printf("%p\n", cube->map.map2d);
 	while (cube->map.map2d[i])
 	{
+		printf("%d\n", i);
 		j = 0;
 		while (cube->map.map2d[i][j])
 		{
 			if (!is_good(cube->map.map2d[i][j]))
 				return (printf("Error\nWrong Char\n"), 0);
-			find_direction(cube->map.map2d[i][j], i, j, cube);
+			if (ft_strchr("NSEW", cube->map.map2d[i][j]))
+			{
+				if (cube->map.p_x != 0 || cube->map.p_y != 0)
+					return (printf("Error\nToo many players\n"), 0);
+				find_direction(cube->map.map2d[i][j], i, j, cube);
+			}
 			j++;
 		}
 		i++;
 	}
-	printf("hello ni\n");
+	// printf("hello ni\n");
 	return (1);
 }
 
@@ -53,37 +59,32 @@ int	is_good(char c)
 		return (1);
 	if (c == 'W')
 		return (1);
-	else
-		return (0);
+	if (c == ' ')
+		return (1);
+	return (0);
 }
 
 bool	find_direction(char c, int i, int j, t_cube *cube)
 {
+	cube->map.p_x = i;
+	cube->map.p_y = j;
 	if (c == 'N')
 	{
-		cube->map.p_x = i;
-		cube->map.p_y = j;
 		cube->player.angle = M_PI / 2.0;
 		return (1);
 	}
 	else if (c == 'S')
 	{
-		cube->map.p_x = i;
-		cube->map.p_y = j;
 		cube->player.angle = -M_PI / 2.0;
 		return (1);
 	}
 	else if (c == 'E')
 	{
-		cube->map.p_x = i;
-		cube->map.p_y = j;
 		cube->player.angle = 0;
 		return (1);
 	}
 	else if (c == 'W')
 	{
-		cube->map.p_x = i;
-		cube->map.p_y = j;
 		cube->player.angle = M_PI;
 		return (1);
 	}

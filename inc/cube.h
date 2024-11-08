@@ -17,7 +17,7 @@
 
 # define MLX_ERROR 0
 
-# define BUFFER_SIZE 10
+// # define BUFFER_SIZE 1000
 # define FILE_DESCRIPTORS 256
 
 # define M_PI 3.14159265358979323846

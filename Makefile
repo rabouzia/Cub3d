@@ -1,4 +1,4 @@
-NAME		=			cube
+NAME		=			cub3D
 NAME_MAC	=			cube_MAC
 
 SRC_DIR		=			src
