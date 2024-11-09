@@ -28,6 +28,7 @@
 # define KEYPRESS 2
 # define KEYRELEASE 3
 # define NUM_TEXTURES 4
+# define TEXTURE_SIZE 64
 
 # define SCREEN_WIDTH 1900
 # define SCREEN_HEIGHT 1000
@@ -76,9 +77,17 @@ typedef struct s_ray
 	int				flag;
 }					t_ray;
 
+
+/*
+	texture_way[0] -> texture.north;
+	texture_way[1] -> texture.south;
+	texture_way[2] -> texture.west;
+	texture_way[3] -> texture.east
+*/
 typedef struct s_texture
 {
-	void			*north;
+	int				texture_way[4];
+	void 			*north;
 	void			*south;
 	void			*west;
 	void			*east;
