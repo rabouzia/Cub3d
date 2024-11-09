@@ -3,7 +3,7 @@ SO ./textures/simple_wall.xpm
 WE ./textures/simple_wall.xpm
 EA ./textures/simple_wall.xpm
 
-F 220,100,0
+F 200,200,0
 C 225,30,0
 
         1111111111111111111111111

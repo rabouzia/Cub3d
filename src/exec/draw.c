@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:33:54 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/09 02:27:11 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/09 18:14:36 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	draw_floor_ceiling(t_cube *cube, int ray, int top_pix, int bottom_pix)
 
 	i = bottom_pix;
 	while (i < SCREEN_HEIGHT)
-		ft_mlx_pixel_put(cube, ray, i++, cube->texture.floor); // floor
+		ft_mlx_pixel_put(cube, ray, i++, cube->texture_way[5].f_or_c); // floor
 	i = 0;
 	while (i < top_pix)
-		ft_mlx_pixel_put(cube, ray, i++, cube->texture.ceiling); // sky
+		ft_mlx_pixel_put(cube, ray, i++,cube->texture_way[4].f_or_c); // sky
 }
 
 // void	ft_init_textures(t_cube *cube)
@@ -38,37 +38,40 @@ int	get_color(t_cube *cube, int flag)
 	if (flag == 0)
 	{
 		if (cube->ray.ray_ngl > M_PI / 2 && cube->ray.ray_ngl < 3 * (M_PI / 2))
-			return (KAKI_PIXEL);//printf("here bro\n"),cube->texture.texture_way[2]);
+			return (KAKI_PIXEL);//printf("here bro\n"),cube->texture.texture_way[2]); west
 		else
-			return (KAKI_PIXEL);//cube->texture.texture_way[3]);
+			return (KAKI_PIXEL);//cube->texture.texture_way[3]); east
 	}
 	else
 	{
 		if (cube->ray.ray_ngl > 0 && cube->ray.ray_ngl < M_PI)
-			return (KAKI_PIXEL);//cube->texture.texture_way[1]);
+			return (RED_PIXEL);//cube->texture.texture_way[1]); south
 		else
-			return (KAKI_PIXEL);//cube->texture.texture_way[0]);
+			return (GREY_PIXEL);//cube->texture.texture_way[0]); north
 	}
 }
-typedef struct s_tex
-{
-	mlx_texture_t	*no;
-	mlx_texture_t	*so;
-	mlx_texture_t	*we;
-	mlx_texture_t	*ea;
-}	t_tex;
+
 void	draw_wall(t_cube *cube, int ray, int t_pix, int b_pix)
 {
-	
-
-	
 	const int	color = get_color(cube, cube->ray.flag);
 
 	while (t_pix < b_pix)
 		ft_mlx_pixel_put(cube, ray, t_pix++, color);
 }
 
-// void	draw_wall(t_mlx *mlx, int t_pix, int b_pix, double wall_h)
+// double	get_x_o(t_texture *texture, t_cube *cube)
+// {
+// 	double	x_o;
+
+// 	if (cube->ray.flag == 1)
+// 		x_o = (int)fmodf((cube->ray.horiz_x * \
+// 		(texture->width / TILE_SIZE)), texture->width);
+// 	else
+// 		x_o = (int)fmodf((cube->ray.vert_y * \
+// 		(texture->width / TILE_SIZE)), texture->width);
+// }
+
+// void	draw_wall(t_cube *cube, int t_pix, int b_pix, double wall_h)
 // {
 // 	double			x_o;
 // 	double			y_o;
@@ -108,6 +111,7 @@ void	render_wall(t_cube *cube, int ray)
 		bottom_pix = SCREEN_HEIGHT;
 	if (top_pix < 0)
 		top_pix = 0;
+	cube->ray.index = ray;
 	draw_wall(cube, ray, top_pix, bottom_pix);
 	draw_floor_ceiling(cube, ray, top_pix, bottom_pix);
 }

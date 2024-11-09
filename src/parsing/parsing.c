@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:29:06 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/09 01:38:04 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/09 14:24:22 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	game_loop(t_cube *cube)
 {
 	// printf("x %f y %f\n", cube->player.plyr_x, cube->player.plyr_y);
 	cast(cube);
-	printf("asdasd\n");
 	mlx_put_image_to_window(cube->mlx, cube->win, cube->image.img, 0, 0);
 	inputs(cube);
 	return (0);

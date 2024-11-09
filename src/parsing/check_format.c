@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 15:50:18 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/08 20:42:59 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/09 18:13:55 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,15 +179,12 @@ int	check_extension(char *line, char *extension)
 	return (!strncmp(&line[i], extension, ex_len));
 }
 
-int	get_path(t_cube *cube, char *line, const void **way)
+int	get_path(t_cube *cube, char *line, t_pixel *p)
 {
-	int	x;
-	int	y;
-
 	if (!check_extension(line, ".xpm"))
 		return (printf("ext err\n"), 0);
-	*way = mlx_xpm_file_to_image(cube->mlx, line + 5, &x, &y);
-	if (!*way)
+	p->addr = mlx_xpm_file_to_image(cube->mlx, line + 5, &p->pix_w, &p->pix_h);
+	if (!p->addr)
 		return (printf("xpm error\n"), 0);
 	return (1);
 }
@@ -213,7 +210,7 @@ int	ft_atoi(const char *str)
 	return (n);
 }
 
-int	get_rgb(t_cube *cube, char *line, const void **way)
+int	get_rgb(t_cube *cube, char *line, t_pixel *way) //, int i)
 {
 	char			**color;
 	unsigned int	res;
@@ -233,7 +230,9 @@ int	get_rgb(t_cube *cube, char *line, const void **way)
 	rgb = ft_atoi(color[2]);
 	if (rgb == -1)
 		return (0);
-	*(unsigned int *)(*way) = res;
+	res |= rgb;
+	way->f_or_c = res;
+	// printf("rgb is %x, way is %x\n", res, way[i].f_or_c);
 	free_tab(color);
 	return (1);
 }
@@ -241,11 +240,16 @@ int	get_rgb(t_cube *cube, char *line, const void **way)
 int	get_info(t_cube *cube, char *line)
 {
 	static char	*prefixes[6] = {"NO ", "SO ", "EA ", "WE ", "C ", "F "};
-	const void	*ptrs[6] = {&cube->texture.north, &cube->texture.south,
-			&cube->texture.east, &cube->texture.west, &cube->texture.ceiling,
-			&cube->texture.floor};
 	int			i;
 
+	// static t_pixel	ptrs[6] = {cube->texture.north  , cube->texture.south,
+	// cube->texture.east,
+	// 		cube->texture.west, cube->texture.ceiling, cube->texture.floor};
+	// get_path(cube, line, &cube->texture.north->addr);
+	// get_path(cube, line, &cube->texture.south->addr);
+	// get_path(cube, line, &cube->texture.west->addr);
+	// get_path(cube, line, &cube->texture.east->addr);
+	// get_rgb(cube, line, )
 	i = 0;
 	while (i < 6)
 	{
@@ -253,12 +257,14 @@ int	get_info(t_cube *cube, char *line)
 		{
 			if (i >= 4)
 			{
-				if (!get_rgb(cube, line, &ptrs[i])) // TODO get_rgb aussi
+				if (!get_rgb(cube, line, &cube->texture_way[i]))
+					// TODO get_rgb aussi
 					return (printf("Map error\n"), 0);
 			}
 			else
 			{
-				if (!get_path(cube, line, &ptrs[i])) // TODO get_rgb aussi
+				if (!get_path(cube, line, &cube->texture_way[i]))
+					// TODO get_rgb aussi
 					return (printf("Map error\n"), 0);
 			}
 			return (1);

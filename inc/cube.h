@@ -54,9 +54,12 @@ typedef struct s_pixel
 {
 	void			*img;
 	char			*addr;
+	int				pix_w;
+	int				pix_h;
 	int				bpp;
 	int				line_len;
 	int				endian;
+	unsigned int	f_or_c;
 }					t_pixel;
 
 typedef struct s_player
@@ -72,28 +75,26 @@ typedef struct s_player
 
 typedef struct s_ray
 {
+	int				index;
 	double			ray_ngl;
+	double			horiz_x;
+	double			horiz_y;
+	double			vert_x;
+	double			vert_y;
 	double			distance;
 	int				flag;
 }					t_ray;
 
+// typedef struct s_texture
+// {
 
-/*
-	texture_way[0] -> texture.north;
-	texture_way[1] -> texture.south;
-	texture_way[2] -> texture.west;
-	texture_way[3] -> texture.east
-*/
-typedef struct s_texture
-{
-	int				texture_way[4];
-	void 			*north;
-	void			*south;
-	void			*west;
-	void			*east;
-	unsigned int	floor;
-	unsigned int	ceiling;
-}					t_texture;
+// t_pixel			*north;
+// t_pixel			*south;
+// t_pixel			*west;
+// t_pixel			*east;
+// t_pixel			*ceiling;
+// t_pixel			*floor;
+// }					t_texture;
 
 typedef struct s_map_info
 {
@@ -117,9 +118,17 @@ typedef struct s_cube
 	t_map_info		map;
 	t_ray			ray;
 	t_player		player;
-	t_texture		texture;
+	t_pixel			texture_way[6];
 }					t_cube;
 
+/*
+	texture_way[0] -> texture.north;
+	texture_way[1] -> texture.south;
+	texture_way[2] -> texture.west;
+	texture_way[3] -> texture.east
+	texture_way[3] -> texture.floor
+	texture_way[3] -> texture.ceil
+*/
 //############ parsing ####################
 
 bool				parsing(t_cube *cube, char **av);
