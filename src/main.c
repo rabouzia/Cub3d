@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:21:18 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/09 01:37:41 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/09 19:10:29 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	main(int ac, char **av)
 		return (0);
 	if (!raycasting(&cube))
 		return (0);
-	
 	ft_exit(&cube);
 	return (0);
 }

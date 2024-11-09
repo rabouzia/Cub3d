@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:37:09 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/09 13:57:00 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/09 19:24:10 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ float	get_horizontal_intersection(t_cube *cube, float angl)
 		h_x += x_step;
 		h_y += y_step;
 	}
+	cube->ray.horiz_x = h_x;
+	cube->ray.horiz_y = h_y;
 	return (sqrt(pow(h_x - cube->player.plyr_x, 2) + pow(h_y
 				- cube->player.plyr_y, 2)));
 }
@@ -78,6 +80,8 @@ float	get_vertical_intersection(t_cube *cube, float angl)
 		v_x += x_step;
 		v_y += y_step;
 	}
+	cube->ray.vert_x = v_x;
+	cube->ray.vert_y = v_y;
 	return (sqrt(pow(v_x - cube->player.plyr_x, 2) + pow(v_y
 				- cube->player.plyr_y, 2)));
 }

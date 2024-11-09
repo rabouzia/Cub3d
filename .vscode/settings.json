@@ -5,6 +5,7 @@
 		"mlx.h": "c",
 		"stdio.h": "c",
 		"get_next_line.h": "c",
-		"stdlib.h": "c"
+		"stdlib.h": "c",
+		"cmath": "cpp"
 	}
 }

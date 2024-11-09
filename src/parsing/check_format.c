@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 15:50:18 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/09 18:13:55 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/09 19:09:31 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,8 +183,12 @@ int	get_path(t_cube *cube, char *line, t_pixel *p)
 {
 	if (!check_extension(line, ".xpm"))
 		return (printf("ext err\n"), 0);
-	p->addr = mlx_xpm_file_to_image(cube->mlx, line + 5, &p->pix_w, &p->pix_h);
-	if (!p->addr)
+	printf("<%s>\n", line + 5);
+	p->img = mlx_xpm_file_to_image(cube->mlx, line + 5, &p->pix_w, &p->pix_h);
+	mlx_put_image_to_window(cube->mlx, cube->win, p->img, 0, 0);
+	p->addr = mlx_get_data_addr(cube->pixel.img, &cube->pixel.bpp,
+			&cube->pixel.line_len, &cube->pixel.endian);
+	if (!p->img)
 		return (printf("xpm error\n"), 0);
 	return (1);
 }

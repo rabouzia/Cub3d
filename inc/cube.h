@@ -168,7 +168,9 @@ void				draw_floor_ceiling(t_cube *cube, int ray, int top_pix,
 
 int					get_color(t_cube *cube, int flag);
 
-void				draw_wall(t_cube *cube, int ray, int t_pix, int b_pix);
+// void				draw_wall(t_cube *cube, int ray, int t_pix, int b_pix);
+void				draw_wall(t_cube *cube, int t_pix, int b_pix,
+						double wall_h);
 
 void				render_wall(t_cube *cube, int ray);
 
