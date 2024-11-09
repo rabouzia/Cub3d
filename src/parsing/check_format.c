@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 15:50:18 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/09 19:09:31 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/09 22:39:55 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,9 @@ int	nb_ligne(char *file)
 		free(ligne);
 		i++;
 	}
+	// stocker les lignes dans une liste chainee en void* 	
+	// clean la liste chainee
+	// et donner au tab de texture et au tab map les infos;
 	close(fd);
 	return (i);
 }
@@ -186,8 +189,7 @@ int	get_path(t_cube *cube, char *line, t_pixel *p)
 	printf("<%s>\n", line + 5);
 	p->img = mlx_xpm_file_to_image(cube->mlx, line + 5, &p->pix_w, &p->pix_h);
 	mlx_put_image_to_window(cube->mlx, cube->win, p->img, 0, 0);
-	p->addr = mlx_get_data_addr(cube->pixel.img, &cube->pixel.bpp,
-			&cube->pixel.line_len, &cube->pixel.endian);
+	p->addr = mlx_get_data_addr(p->img, &p->bpp, &p->line_len, &p->endian);
 	if (!p->img)
 		return (printf("xpm error\n"), 0);
 	return (1);
@@ -246,14 +248,6 @@ int	get_info(t_cube *cube, char *line)
 	static char	*prefixes[6] = {"NO ", "SO ", "EA ", "WE ", "C ", "F "};
 	int			i;
 
-	// static t_pixel	ptrs[6] = {cube->texture.north  , cube->texture.south,
-	// cube->texture.east,
-	// 		cube->texture.west, cube->texture.ceiling, cube->texture.floor};
-	// get_path(cube, line, &cube->texture.north->addr);
-	// get_path(cube, line, &cube->texture.south->addr);
-	// get_path(cube, line, &cube->texture.west->addr);
-	// get_path(cube, line, &cube->texture.east->addr);
-	// get_rgb(cube, line, )
 	i = 0;
 	while (i < 6)
 	{
@@ -262,20 +256,18 @@ int	get_info(t_cube *cube, char *line)
 			if (i >= 4)
 			{
 				if (!get_rgb(cube, line, &cube->texture_way[i]))
-					// TODO get_rgb aussi
 					return (printf("Map error\n"), 0);
 			}
 			else
 			{
 				if (!get_path(cube, line, &cube->texture_way[i]))
-					// TODO get_rgb aussi
 					return (printf("Map error\n"), 0);
 			}
 			return (1);
 		}
 		i++;
 	}
-	return (0);
+	return (printf("Not recognize path or direction\n"), 0);
 }
 
 int	read_cub(t_cube *cube)
@@ -292,7 +284,6 @@ int	read_cub(t_cube *cube)
 	i = 0;
 	map_rows = nb_ligne(cube->av[1]) - 8; // TODO Ptet c'est pas 8 tjr jsp
 	cube->fd = open(cube->av[1], O_RDONLY, 0664);
-	printf("rows %d\n", map_rows);
 	cube->map.map2d = ft_calloc(map_rows + 1, sizeof(char *));
 	while (1)
 	{

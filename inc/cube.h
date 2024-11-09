@@ -50,6 +50,19 @@
 # define NORTH_WALL 0x5645A0
 # define SOUTH_WALL 0x99CCAA
 
+typedef enum s_arg_type
+{
+	INFO,
+	MAP,
+}					t_arg_type;
+
+typedef struct s_arg
+{
+	t_arg_type		type;
+	char			*content;
+	struct s_arg	*next;
+}					t_arg;
+
 typedef struct s_pixel
 {
 	void			*img;
@@ -250,5 +263,17 @@ int					quit_click(t_cube *d);
 void				quit_esc(t_cube *d);
 
 void				ft_exit(t_cube *cube);
+
+//############ lst arg #######################
+
+void				ft_argaddback(t_arg **head, t_arg *new);
+
+t_arg				*ft_argnew(char *str, t_arg_type type);
+
+t_arg				*ft_arglast(t_arg *head);
+
+int					ft_argmap(t_arg *arg);
+
+void				ft_argclear(t_arg *arg);
 
 #endif

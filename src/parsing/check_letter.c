@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 15:46:19 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/08 20:41:40 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/09 22:44:16 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,12 @@ bool	find_direction(char c, int i, int j, t_cube *cube)
 	cube->map.p_y = j;
 	if (c == 'N')
 	{
-		cube->player.angle = M_PI / 2.0;
+		cube->player.angle = -M_PI / 2.0;
 		return (1);
 	}
 	else if (c == 'S')
 	{
-		cube->player.angle = -M_PI / 2.0;
+		cube->player.angle = M_PI / 2.0;
 		return (1);
 	}
 	else if (c == 'E')

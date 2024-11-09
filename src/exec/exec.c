@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 10:34:44 by ramzerk           #+#    #+#             */
-/*   Updated: 2024/11/09 14:24:26 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/09 22:11:50 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	cast(t_cube *cube)
 		cube->ray.flag = 0;
 		horiz_inter = get_horizontal_intersection(cube,
 				nor_angle(cube->ray.ray_ngl));
-		// write(1, "HERE2\n", 6);
 		vertic_inter = get_vertical_intersection(cube,
 				nor_angle(cube->ray.ray_ngl));
 		if (vertic_inter <= horiz_inter)
