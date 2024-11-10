@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:33:54 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/09 22:15:43 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/10 18:56:02 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void	draw_wall(t_cube *cube, int t_pix, int b_pix, double wall_h)
 	double			factor;
 
 	texture = get_right_texture(cube);
-	mlx_put_image_to_window(cube->mlx, cube->win, texture.img, 0, 0);
+	// mlx_put_image_to_window(cube->mlx, cube->win, texture.img, 0, 0);
 	arr = (unsigned int *)texture.addr;
 	factor = (double)texture.pix_h / wall_h;
 	x_o = get_x_o(&texture, cube);

@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:37:09 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/09 19:24:10 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/10 20:40:06 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ int	wall_hit(float x, float y, t_cube *cube)
 	y_m = floor(y / TILE_SIZE);
 	if (x_m < 0 || y_m < 0)
 		return (0);
-	if (y_m >= cube->map.h_map || x_m >= cube->map.w_map)
+	if (y_m >= cube->map.columns || x_m >= cube->map.rows)
 		return (0);
-	// printf("h %d w %d\n", cube->map.h_map, cube->map.w_map);
-	// printf("%s\n", cube->map.map2d[y_m]);
-	if (cube->map.map2d[y_m] && x_m <= (int)ft_strlen(cube->map.map2d[y_m]))
-		if (cube->map.map2d[y_m][x_m] == '1'
-			|| cube->map.map2d[y_m][x_m] == ' ')
+	// printf("h %d w %d\n", cube->map.columns, cube->map.rows);
+	// printf("%s\n", cube->map.tab_map[y_m]);
+	if (cube->map.tab_map[y_m] && x_m <= (int)ft_strlen(cube->map.tab_map[y_m]))
+		if (cube->map.tab_map[y_m][x_m] == '1'
+			|| cube->map.tab_map[y_m][x_m] == ' ')
 			return (0);
 	return (1);
 }

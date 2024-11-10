@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 15:46:19 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/09 22:44:16 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/10 20:40:06 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,21 @@ int	letter_check(t_cube *cube)
 	int	j;
 
 	i = 0;
-	// print_tab(cube->map.map2d);
-	printf("%p\n", cube->map.map2d);
-	while (cube->map.map2d[i])
+	// print_tab(cube->map.tab_map);
+	// printf("%p\n", cube->map.tab_map);e
+	while (cube->map.tab_map[i])
 	{
-		printf("%d\n", i);
+		// printf("%d\n", i);
 		j = 0;
-		while (cube->map.map2d[i][j])
+		while (cube->map.tab_map[i][j])
 		{
-			if (!is_good(cube->map.map2d[i][j]))
+			if (!is_good(cube->map.tab_map[i][j]))
 				return (printf("Error\nWrong Char\n"), 0);
-			if (ft_strchr("NSEW", cube->map.map2d[i][j]))
+			if (ft_strchr("NSEW", cube->map.tab_map[i][j]))
 			{
 				if (cube->map.p_x != 0 || cube->map.p_y != 0)
 					return (printf("Error\nToo many players\n"), 0);
-				find_direction(cube->map.map2d[i][j], i, j, cube);
+				find_direction(cube->map.tab_map[i][j], i, j, cube);
 			}
 			j++;
 		}

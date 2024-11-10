@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 00:19:47 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/10 00:25:57 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/10 17:44:47 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_arg	*ft_argnew(char *str, t_arg_type type)
 	if (!arg)
 		return (NULL);
 	arg->type = type;
-	arg->content = str;
+	arg->content = ft_strdup(str);
 	arg->next = NULL;
 	return (arg);
 }

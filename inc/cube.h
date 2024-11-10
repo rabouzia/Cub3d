@@ -20,7 +20,7 @@
 // # define BUFFER_SIZE 1000
 # define FILE_DESCRIPTORS 256
 
-// # define M_PI 3.14159265358979323846
+# define M_PI 3.14159265358979323846
 
 # define RECT_P_SIZE 10
 # define RECT_WALL_SIZE 30
@@ -52,9 +52,9 @@
 
 typedef enum s_arg_type
 {
+	TRASH,
 	INFO,
 	MAP,
-	TRASH,
 }					t_arg_type;
 
 typedef struct s_arg
@@ -99,24 +99,13 @@ typedef struct s_ray
 	int				flag;
 }					t_ray;
 
-// typedef struct s_texture
-// {
-
-// t_pixel			*north;
-// t_pixel			*south;
-// t_pixel			*west;
-// t_pixel			*east;
-// t_pixel			*ceiling;
-// t_pixel			*floor;
-// }					t_texture;
-
 typedef struct s_map_info
 {
-	char			**map2d;
+	char			**tab_map;
 	int				p_x;
 	int				p_y;
-	int				w_map;
-	int				h_map;
+	int				rows;
+	int				columns;
 }					t_map_info;
 
 typedef struct s_cube
@@ -127,9 +116,10 @@ typedef struct s_cube
 	void			*win;
 	bool			inputs[128];
 	// t_pixel			pixel;
-	// t_pixel			image;
+	t_pixel			image;
 	t_map_info		map;
 	t_ray			ray;
+	t_arg			*arg;
 	t_player		player;
 	t_pixel			texture_way[6];
 }					t_cube;
@@ -144,11 +134,31 @@ typedef struct s_cube
 */
 //############ parsing ####################
 
+int					check_extension(char *line, char *extension);
+
+int					get_path(t_cube *cube, char *line, t_pixel *p);
+
+int					get_rgb(t_cube *cube, char *line, t_pixel *way);
+
+int					get_info(t_cube *cube, char *line);
+
 bool				parsing(t_cube *cube, char **av);
 
 int					read_cub(t_cube *data);
 
 int					letter_check(t_cube *map);
+
+void				fill_info(t_cube *cube);
+
+void				count_row(t_cube *cube);
+
+void				fill_map(t_cube *cube);
+
+int					get_lst(t_cube *cube, char *file);
+
+int					flag_line(char *str);
+
+void				count_columns(t_cube *cube);
 
 int					is_good(char c);
 
@@ -238,6 +248,14 @@ float				get_vertical_intersection(t_cube *cube, float angl);
 
 void				render_wall(t_cube *cube, int ray);
 
+char				**ft_split(char const *s, char c);
+
+int					ft_atoi(const char *str);
+
+int					ft_strncmp(char *s1, char *s2, int n);
+
+void				printarg(t_arg *arg);
+
 char				*ft_strdup(char *str);
 
 float				nor_angle(float angle);
@@ -262,10 +280,11 @@ int					quit_click(t_cube *d);
 
 void				quit_esc(t_cube *d);
 
+void				free_tab(char **tab);
 
 //############ lst arg #######################
 
-void	ft_end(t_cube *cube, char *str);
+void				ft_end(t_cube *cube, char *str);
 
 void				ft_argaddback(t_arg **head, t_arg *new);
 

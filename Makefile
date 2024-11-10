@@ -10,6 +10,8 @@ SRC_FILES	=			main.c 							\
 						parsing/check_format.c			\
 						parsing/get_next_line.c			\
 						parsing/get_next_line_utils.c	\
+						parsing/check_xpm.c				\
+						parsing/fill_arg.c				\
 						exec/exec.c 					\
 					 	exec/key_log.c					\
 						exec/minilibx.c					\
@@ -18,8 +20,10 @@ SRC_FILES	=			main.c 							\
 						exec/calculus.c					\
 						exec/display.c					\
 						lib/libft_portable.c 			\
+						lib/arg.c 						\
 						lib/clean.c 					\
 						lib/string.c 					\
+						lib/string2.c 					\
 
 CC			=			cc
 CFLAGS 		=			-ffast-math -Wall -Wextra -Werror -g3 -Iinc
@@ -47,6 +51,9 @@ all: 					$(NAME)
 remac: 					fclean mac
 
 re: 					fclean all
+
+valgrind: 				$(NAME)
+						valgrind --leak-check=full --show-leak-kinds=all --quiet ./$(NAME) maps/map1-big-scale.cub
 
 mac: 					$(NAME_MAC)
 

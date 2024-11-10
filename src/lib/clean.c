@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 10:57:29 by ramzerk           #+#    #+#             */
-/*   Updated: 2024/11/10 01:20:54 by ramzerk          ###   ########.fr       */
+/*   Updated: 2024/11/10 20:40:06 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,17 @@ void	ft_end(t_cube *cube, char *str)
 {
 	(void)cube;
 	// int	i = 0;
-	// while (cube->map.map2d[i])
-	// 	free(cube->map.map2d[i++]);
-	// free(cube->map.map2d);
+	// while (cube->map.tab_map[i])
+	// 	free(cube->map.tab_map[i++]);
+	// free(cube->map.tab_map);
 	// free(cube.map);
 	// free(cube->ply);
 	// free(cube->ray);
 	// mlx_destroy_image(mlx->mlx_p, mlx->img);
 	// mlx_close_window(mlx->win);
 	// mlx_terminate(mlx->mlx_p);
+	printf("lst arg cleared\n");
+	ft_argclear(cube->arg);
 	printf("%s\n", str);
 	exit(0);
 }
