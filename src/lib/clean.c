@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 10:57:29 by ramzerk           #+#    #+#             */
-/*   Updated: 2024/11/07 13:07:43 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/10 01:20:54 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-void	ft_exit(t_cube *cube)
+void	ft_end(t_cube *cube, char *str)
 {
 	(void)cube;
 	// int	i = 0;
@@ -25,6 +25,7 @@ void	ft_exit(t_cube *cube)
 	// mlx_destroy_image(mlx->mlx_p, mlx->img);
 	// mlx_close_window(mlx->win);
 	// mlx_terminate(mlx->mlx_p);
+	printf("%s\n", str);
 	exit(0);
 }
 

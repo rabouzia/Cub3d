@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_log.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:55:52 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/07 13:43:10 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/10 01:30:47 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	key_press(int key, t_cube *cube)
 {
 	if (key == XK_Escape || key == XK_q)
-		ft_exit(cube);
+		ft_end(cube, "Esc quit");
 	if (key >= 32 && key < 126)
 		cube->inputs[key] = 1;
 	if (key == XK_Right)

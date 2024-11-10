@@ -20,7 +20,7 @@
 // # define BUFFER_SIZE 1000
 # define FILE_DESCRIPTORS 256
 
-# define M_PI 3.14159265358979323846
+// # define M_PI 3.14159265358979323846
 
 # define RECT_P_SIZE 10
 # define RECT_WALL_SIZE 30
@@ -54,6 +54,7 @@ typedef enum s_arg_type
 {
 	INFO,
 	MAP,
+	TRASH,
 }					t_arg_type;
 
 typedef struct s_arg
@@ -120,14 +121,13 @@ typedef struct s_map_info
 
 typedef struct s_cube
 {
-	char			**tab_map;
 	int				fd;
 	char			**av;
 	void			*mlx;
 	void			*win;
 	bool			inputs[128];
-	t_pixel			pixel;
-	t_pixel			image;
+	// t_pixel			pixel;
+	// t_pixel			image;
 	t_map_info		map;
 	t_ray			ray;
 	t_player		player;
@@ -262,9 +262,10 @@ int					quit_click(t_cube *d);
 
 void				quit_esc(t_cube *d);
 
-void				ft_exit(t_cube *cube);
 
 //############ lst arg #######################
+
+void	ft_end(t_cube *cube, char *str);
 
 void				ft_argaddback(t_arg **head, t_arg *new);
 

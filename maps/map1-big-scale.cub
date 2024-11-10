@@ -1,6 +1,6 @@
 NO ./textures/bookshelf.xpm
-SO ./textures/bookshelf.xpm
-WE ./textures/bookshelf.xpm
+SO ./textures/pillar.xpm
+WE ./textures/wall1.xpm
 EA ./textures/bookshelf.xpm
 
 F 255,0,255

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_format.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 15:50:18 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/09 22:39:55 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/10 15:35:54 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,22 +142,37 @@ int	ft_strncmp(char *s1, char *s2, int n)
 	return (s1[i] - s2[i]);
 }
 
+int check_line(char *str)
+{
+	int i; 
+	i = 0;
+	if(str[i] == NO || SO EA WE )
+		return (INFO);
+	if (str[i] == 0 ou N S E W 1)
+		return MAP;
+	else
+		return TRASH;
+}
+
 int	nb_ligne(char *file)
 {
 	int		fd;
 	int		i;
-	char	*ligne;
+	char	*line;
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (0);
 	i = 0;
+	t_arg *lst;
 	while (1)
 	{
-		ligne = get_next_line(fd);
-		if (!ligne)
+		line = get_next_line(fd);
+		if (!line)
 			break ;
-		free(ligne);
+		check_line(line);
+		ft_argaddback(lst, ft_argnew(line, ));
+		free(line);
 		i++;
 	}
 	// stocker les lignes dans une liste chainee en void* 	
@@ -185,13 +200,13 @@ int	check_extension(char *line, char *extension)
 int	get_path(t_cube *cube, char *line, t_pixel *p)
 {
 	if (!check_extension(line, ".xpm"))
-		return (printf("ext err\n"), 0);
+		ft_end(cube,"extention error");
 	printf("<%s>\n", line + 5);
 	p->img = mlx_xpm_file_to_image(cube->mlx, line + 5, &p->pix_w, &p->pix_h);
 	mlx_put_image_to_window(cube->mlx, cube->win, p->img, 0, 0);
 	p->addr = mlx_get_data_addr(p->img, &p->bpp, &p->line_len, &p->endian);
 	if (!p->img)
-		return (printf("xpm error\n"), 0);
+		ft_end(cube,"xpm error");
 	return (1);
 }
 
@@ -238,8 +253,6 @@ int	get_rgb(t_cube *cube, char *line, t_pixel *way) //, int i)
 		return (0);
 	res |= rgb;
 	way->f_or_c = res;
-	// printf("rgb is %x, way is %x\n", res, way[i].f_or_c);
-	free_tab(color);
 	return (1);
 }
 
@@ -256,31 +269,31 @@ int	get_info(t_cube *cube, char *line)
 			if (i >= 4)
 			{
 				if (!get_rgb(cube, line, &cube->texture_way[i]))
-					return (printf("Map error\n"), 0);
+					ft_end(cube,"rgb error");
 			}
 			else
 			{
 				if (!get_path(cube, line, &cube->texture_way[i]))
-					return (printf("Map error\n"), 0);
+					ft_end(cube,"texture error");
 			}
 			return (1);
 		}
 		i++;
 	}
-	return (printf("Not recognize path or direction\n"), 0);
+	return(0);
 }
 
 int	read_cub(t_cube *cube)
 {
-	char	*line;
-	int		c;
 	int		i;
 	int		map_rows;
 	int		good;
+	char *line;
+	int c;
 
 	c = 0;
 	if (!check_extension(cube->av[1], ".cub"))
-		return (ft_putstr_fd("Error\nWrong file extension\n", 1), 0);
+				ft_end(cube,"Error\nWrong file extension\n");
 	i = 0;
 	map_rows = nb_ligne(cube->av[1]) - 8; // TODO Ptet c'est pas 8 tjr jsp
 	cube->fd = open(cube->av[1], O_RDONLY, 0664);
