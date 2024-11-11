@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:29:06 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/11 15:11:52 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/11 18:22:45 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ bool	parsing(t_cube *cube, char **av)
 	if (!read_cub(cube))
 		return (0);
 	if (!flood_fill(cube->map.tab_map))
-		return (0);
+		return (ft_end(cube, "nice try, map not closed"), 0);
 	if (!letter_check(cube))
 		return (0);
 	init_the_player(cube);

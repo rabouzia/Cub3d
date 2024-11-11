@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 20:37:54 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/11 16:23:05 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/11 18:13:38 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,8 @@ int	get_lst(t_cube *cube, char *file)
 {
 	int		fd;
 	char	*line;
-	t_arg	*lst;
 	int		flag;
 
-	lst = cube->arg;
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (0);
@@ -62,12 +60,10 @@ int	get_lst(t_cube *cube, char *file)
 			break ;
 		flag = flag_line(line);
 		if (flag == TRASH)
-			return (0);
-		ft_argaddback(&lst, ft_argnew(line, flag));
+			return (free(line), 0);
+		ft_argaddback(&(cube->arg), ft_argnew(line, flag));
 		free(line);
 	}
-	cube->arg = lst;
-	printarg(lst);
 	close(fd);
 	return (1);
 }

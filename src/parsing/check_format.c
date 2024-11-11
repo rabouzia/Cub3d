@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 15:50:18 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/11 16:24:06 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/11 18:16:20 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	get_path(t_cube *cube, char *line, t_pixel *p)
 {
-	if (!check_extension(line, ".xpm"))
-	{
-		free(line);
-		ft_end(cube, "extention error <.xpm> ");
-	}
+	// if (!check_extension(line, ".xpm"))
+	// {
+	// 	free(line);
+	// 	ft_end(cube, "extention error <.xpm> ");
+	// }
 	if (p->img)
 		ft_end(cube, "same .xpm");
 	p->img = mlx_xpm_file_to_image(cube->mlx, line + 5, &p->pix_w, &p->pix_h);
