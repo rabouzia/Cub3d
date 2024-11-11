@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 20:37:54 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/11 13:20:38 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/11 16:23:05 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,18 @@ int	get_lst(t_cube *cube, char *file)
 		if (!line)
 			break ;
 		flag = flag_line(line);
+		if (flag == TRASH)
+			return (0);
 		ft_argaddback(&lst, ft_argnew(line, flag));
 		free(line);
 	}
 	cube->arg = lst;
+	printarg(lst);
 	close(fd);
 	return (1);
 }
 
-void	fill_map(t_cube *cube)
+int	fill_map(t_cube *cube)
 {
 	t_arg	*lst;
 	int		i;
@@ -80,9 +83,14 @@ void	fill_map(t_cube *cube)
 	while (lst)
 	{
 		if (lst->type == MAP)
+		{
 			cube->map.tab_map[++i] = lst->content;
+			if (lst->next != NULL && lst->next->type != MAP)
+				return (0);
+		}
 		lst = lst->next;
 	}
+	return (1);
 }
 
 void	fill_info(t_cube *cube)
@@ -99,34 +107,22 @@ void	fill_info(t_cube *cube)
 }
 int	flag_line(char *str)
 {
-	int	i;
+	char	c;
 
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '1' && (str[i + 1] == '1' || str[i + 1] == '0'))
-			return (MAP);
-		if (str[i] == '1' && (str[i + 1] == ' ' || str[i + 1] == 'N'))
-			return (MAP);
-		if (str[i] == '1' && (str[i + 1] == ' ' || str[i + 1] == 'W'))
-			return (MAP);
-		if (str[i] == '1' && (str[i + 1] == ' ' || str[i + 1] == 'E'))
-			return (MAP);
-		if (str[i] == '1' && (str[i + 1] == ' ' || str[i + 1] == 'S'))
-			return (MAP);
-		if (str[i] == 'N' && str[i + 1] == 'O')
-			return (INFO);
-		if (str[i] == 'S' && str[i + 1] == 'O')
-			return (INFO);
-		if (str[i] == 'E' && str[i + 1] == 'A')
-			return (INFO);
-		if (str[i] == 'W' && str[i + 1] == 'E')
-			return (INFO);
-		if (str[i] == 'F' && str[i + 1] == ' ')
-			return (INFO);
-		if (str[i] == 'C' && str[i + 1] == ' ')
-			return (INFO);
-		i++;
-	}
+	c = str[1];
+	if (str[0] == '\0')
+		return (SPACE);
+	if (str[0] == '1' && (c == '1' || c == '0' || c == ' ' || c == 'N'))
+		return (MAP);
+	if (str[0] == '1' && (c == 'E' || c == 'W' || c == 'S'))
+		return (MAP);
+	if ((str[0] == 'N' || str[0] == 'S') && c == 'O')
+		return (INFO);
+	if (str[0] == 'E' && c == 'A')
+		return (INFO);
+	if (str[0] == 'W' && c == 'E')
+		return (INFO);
+	if ((str[0] == 'F' || str[0] == 'C') && (c == ' '))
+		return (INFO);
 	return (TRASH);
 }

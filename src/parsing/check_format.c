@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 15:50:18 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/11 13:19:35 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/11 16:24:06 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,16 @@ int	read_cub(t_cube *cube)
 
 	c = 0;
 	if (!check_extension(cube->av[1], ".cub"))
-		ft_end(cube, "Error\nWrong file extension\n");
+		ft_end(cube, "Error\nWrong file extension");
 	i = 0;
 	if (!get_lst(cube, cube->av[1]))
-		return (0);
+		return (ft_end(cube, "pb in file"),0);
 	count_columns(cube);
 	count_row(cube);
 	fill_info(cube);
 	if (cube->color_count != 2 || cube->text_count != 4)
 		return (ft_end(cube, "wrong nb info"), 0);
-	fill_map(cube);
+	if (!fill_map(cube))
+		return (ft_end(cube, "map err "), 0);
 	return (1);
 }

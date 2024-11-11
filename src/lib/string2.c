@@ -6,20 +6,38 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 20:35:28 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/11 12:18:21 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/11 15:11:16 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
+bool	is_num(const char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int	ft_atoi(const char *str)
 {
 	int	i;
 	int	n;
+	int	c;
 
 	i = 0;
 	n = 0;
+	c = -1;
 	if (!str)
+		return (-1);
+	if (!is_num(str))
 		return (-1);
 	if (str[i] == '-')
 		return (-1);

@@ -22,6 +22,7 @@ SRC_FILES	=			main.c 							\
 						lib/libft_portable.c 			\
 						lib/arg.c 						\
 						lib/clean.c 					\
+						lib/debug.c 					\
 						lib/string.c 					\
 						lib/string2.c 					\
 

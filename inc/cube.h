@@ -55,6 +55,7 @@ typedef enum s_arg_type
 	TRASH,
 	INFO,
 	MAP,
+	SPACE,
 }					t_arg_type;
 
 typedef struct s_arg
@@ -155,7 +156,9 @@ void				fill_info(t_cube *cube);
 
 void				count_row(t_cube *cube);
 
-void				fill_map(t_cube *cube);
+int					fill_map(t_cube *cube);
+
+bool				flood_fill(char **map);
 
 int					get_lst(t_cube *cube, char *file);
 

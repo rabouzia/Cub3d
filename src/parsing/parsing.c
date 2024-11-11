@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:29:06 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/11 13:24:46 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/11 15:11:52 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,15 @@
 bool	parsing(t_cube *cube, char **av)
 {
 	cube->av = av;
-	// if (!init_argument(cube, av))
-	// 	return (0);
 	if (!read_cub(cube))
 		return (0);
-	// print_tab(cube->map.tab_map);
-	// if (!is_map_valid(cube))
-	// 	return (0);
+	if (!flood_fill(cube->map.tab_map))
+		return (0);
 	if (!letter_check(cube))
 		return (0);
-	// if (!init_cube(cube))
-	// 	return (0);
 	init_the_player(cube);
 	return (1);
 }
-
 
 int	tab_size(char **tab)
 {
@@ -44,74 +38,72 @@ int	tab_size(char **tab)
 	return (i);
 }
 
-char	**ft_copy(char **map)
+int	collumlen(char **tab)
 {
-	char	**copied;
-	int		i;
-	int		len;
+	int	i;
 
 	i = 0;
-	copied = ft_calloc(sizeof(char *), tab_size(map) + 1);
-	if (!copied)
+	while (tab[i])
+		i++;
+	return (i);
+}
+
+bool	is_in_charset(char c, char *set)
+{
+	int	i;
+
+	i = 0;
+	while (set[i])
 	{
-	}
-	len = tab_size(map);
-	while (i < len)
-	{
-		copied[i] = ft_strdup(map[i]);
+		if (set[i] == c)
+			return (true);
 		i++;
 	}
-	copied[i] = NULL;
-	return (copied);
+	return (false);
 }
 
-bool	flood_fill(char **map, int x, int y)
+bool	check_around_tile(char **map, int x, int y)
 {
-	if (!map[x] || !map[x][y])
+	if (x == 0 || y == 0 || x >= ft_strlen(map[y]) - 1 || y >= collumlen(map)
+		- 1)
 		return (false);
-	if (map[x][y] == '1')
-		return (true);
-	map[x][y] = 'X';
-	return (flood_fill(map, x + 1, y) && flood_fill(map, x, y + 1)
-		&& flood_fill(map, x - 1, y) && flood_fill(map, x, y - 1));
+	if (ft_strlen(map[y + 1]) <= x)
+		return (false);
+	if (is_in_charset(map[y + 1][x], "01NSWE") == false)
+		return (false);
+	if (ft_strlen(map[y - 1]) <= x)
+		return (false);
+	if (is_in_charset(map[y - 1][x], "01NSWE") == false)
+		return (false);
+	if (is_in_charset(map[y][x + 1], "01NSWE") == false)
+		return (false);
+	if (is_in_charset(map[y][x - 1], "01NSWE") == false)
+		return (false);
+	return (true);
 }
 
-bool	is_map_valid(t_cube *cube)
+bool	flood_fill(char **map)
 {
-	char	**map_copy;
-	int		map_p_x;
-	int		map_p_y;
+	int	x;
+	int	y;
 
-	// create map copy
-	map_p_x = cube->map.p_x;
-	map_p_y = cube->map.p_y;
-	map_copy = ft_copy(cube->map.tab_map);
-	return (flood_fill(map_copy, map_p_x, map_p_y));
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (is_in_charset(map[y][x], "0NSWE"))
+			{
+				if (check_around_tile(map, x, y) == false)
+					return (false);
+			}
+			x++;
+		}
+		y++;
+	}
+	return (true);
 }
-
-
-// int	flood_fill(t_cube *m)
-// {
-// 	char	**map;
-// 	int		x;
-// 	int		y;
-
-// 	x = -1;
-// 	map = m->map.tab_map;
-// 	while (map[++x])
-// 	{
-// 		y = -1;
-// 		while (map[x][++y])
-// 		{
-// 			if (map[x][y] == '0')
-// 			{
-// 				if (!check_surroundings(map, x, y))
-// 					return (0);
-// 			}
-// 		}
-// 	}
-// 	return (1);
-// }
 int	game_loop(t_cube *cube)
 {
 	cast(cube);
