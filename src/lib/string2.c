@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 20:35:28 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/10 20:35:59 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/11 12:18:21 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ static char	*copy_next_word(char const *s, char c, int *i)
 	word[j] = '\0';
 	return (word);
 }
-
 
 char	**ft_split(char const *s, char c)
 {

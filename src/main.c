@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:21:18 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/10 21:19:08 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/11 11:36:53 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,11 @@ int	main(int ac, char **av)
 		return (0);
 	if (!parsing(&cube, av))
 		return (0);
-	// return (0);
 	if (!raycasting(&cube))
 		return (0);
 	ft_end(&cube, "All cleaned");
 	return (0);
 }
 /*
-	TODO freeing
-		- look for leaks	sa
-	TODO parsing:
-		- parse everything
-	TODO map:
-	- must be 1 0 W D S E W
 	- must be close (0 not surround by anything but P or 1)
-	- lettre valid
-	- check la map avec ce qu'il ya autour des 0 (X: ' ' et 'P')
 	*/

@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 15:46:19 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/10 20:40:06 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/11 12:18:35 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,33 +18,28 @@ int	letter_check(t_cube *cube)
 	int	j;
 
 	i = 0;
-	// print_tab(cube->map.tab_map);
-	// printf("%p\n", cube->map.tab_map);e
 	while (cube->map.tab_map[i])
 	{
-		// printf("%d\n", i);
 		j = 0;
 		while (cube->map.tab_map[i][j])
 		{
 			if (!is_good(cube->map.tab_map[i][j]))
-				return (printf("Error\nWrong Char\n"), 0);
+				return (ft_end(cube, "Wrong Char"), 0);
 			if (ft_strchr("NSEW", cube->map.tab_map[i][j]))
 			{
 				if (cube->map.p_x != 0 || cube->map.p_y != 0)
-					return (printf("Error\nToo many players\n"), 0);
+					return (ft_end(cube, "Too Many Players"), 0);
 				find_direction(cube->map.tab_map[i][j], i, j, cube);
 			}
 			j++;
 		}
 		i++;
 	}
-	// printf("hello ni\n");
 	return (1);
 }
 
 int	is_good(char c)
 {
-	// printf("char is %c\n", c);
 	if (c == '1')
 		return (1);
 	if (c == '0')
@@ -66,8 +61,8 @@ int	is_good(char c)
 
 bool	find_direction(char c, int i, int j, t_cube *cube)
 {
-	cube->map.p_x = i;
-	cube->map.p_y = j;
+	cube->map.p_x = j;
+	cube->map.p_y = i;
 	if (c == 'N')
 	{
 		cube->player.angle = -M_PI / 2.0;

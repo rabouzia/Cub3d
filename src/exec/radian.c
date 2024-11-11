@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:14:34 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/10 20:40:06 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/11 12:19:52 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,13 @@ void	move_player(t_cube *cube, double angle)
 	map_grid_y = ((int)new_y / TILE_SIZE);
 	if ((cube->map.tab_map[map_grid_y][map_grid_x] != '1'
 			&& (cube->map.tab_map[map_grid_y][(int)cube->player.plyr_x
-				/ TILE_SIZE] != '1' && cube->map.tab_map[(int)cube->player.plyr_y
+				/ TILE_SIZE] != '1'
+				&& cube->map.tab_map[(int)cube->player.plyr_y
 				/ TILE_SIZE][map_grid_x] != '1'))
 		|| (cube->map.tab_map[map_grid_y][map_grid_x] != '1'
 			&& (cube->map.tab_map[map_grid_y][(int)cube->player.plyr_x
-				/ TILE_SIZE] != '1' && cube->map.tab_map[(int)cube->player.plyr_y
+				/ TILE_SIZE] != '1'
+				&& cube->map.tab_map[(int)cube->player.plyr_y
 				/ TILE_SIZE][map_grid_x] != '1')))
 	{
 		cube->player.plyr_x = new_x;

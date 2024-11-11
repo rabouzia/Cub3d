@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 20:37:54 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/10 21:04:02 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/11 13:20:38 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	count_row(t_cube *cube)
 			i++;
 		lst = lst->next;
 	}
-	cube->map.rows = i ;
+	cube->map.rows = cube->map.columns;
 }
 
 int	get_lst(t_cube *cube, char *file)
@@ -99,7 +99,7 @@ void	fill_info(t_cube *cube)
 }
 int	flag_line(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])

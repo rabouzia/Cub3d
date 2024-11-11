@@ -115,7 +115,8 @@ typedef struct s_cube
 	void			*mlx;
 	void			*win;
 	bool			inputs[128];
-	// t_pixel			pixel;
+	int				text_count;
+	int				color_count;
 	t_pixel			image;
 	t_map_info		map;
 	t_ray			ray;
@@ -135,6 +136,8 @@ typedef struct s_cube
 //############ parsing ####################
 
 int					check_extension(char *line, char *extension);
+
+bool				is_map_valid(t_cube *cube);
 
 int					get_path(t_cube *cube, char *line, t_pixel *p);
 

@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 11:38:19 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/08 20:47:35 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/11 12:18:29 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*get_next_line(int fd)
 	if (BUFFER_SIZE < 1 || fd > 1024 || fd < 0)
 		return (NULL);
 	lu = 1;
-	res = NULL; 		
+	res = NULL;
 	if (ft_memchr(buff, '\n') != 0)
 	{
 		if (ft_strlen(ft_memchr(buff, '\n') + 1) > 0)
@@ -63,34 +63,3 @@ char	*get_next_line(int fd)
 		return (NULL);
 	return (res);
 }
-
-// char	*get_next_line(int fd)
-// {
-// 	static char buffer[BUFFER_SIZE];
-// 	char line[70000];
-// 	static int buffer_read;
-// 	static int buffer_pos;
-// 	int i;
-
-// 	i = 0;
-// 	if (fd < 0 || BUFFER_SIZE <= 0)
-// 		return (NULL);
-// 	while (1)
-// 	{
-// 		if (buffer_pos >= buffer_read)
-// 		{
-// 			buffer_read = read(fd, buffer, BUFFER_SIZE);
-// 			buffer_pos = 0;
-// 			if (buffer_read <= 0)
-// 				break ;
-// 		}
-// 		if (line[i] == '\n')
-// 			break ;
-// 		line[i] = buffer[buffer_pos++];
-// 		i++;
-// 	}
-// 	line[i] = '\0';
-// 	if (i == 0)
-// 		return (NULL);
-// 	return (ft_strdup(line));
-// }

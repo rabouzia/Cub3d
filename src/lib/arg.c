@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 00:19:47 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/10 17:44:47 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/11 12:18:53 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,13 @@ int	ft_argmap(t_arg *arg)
 
 void	ft_argclear(t_arg *arg)
 {
-	t_arg *tmp;
+	t_arg	*tmp;
 
 	while (arg)
 	{
 		tmp = arg->next;
-		free(arg->content);
+		if (arg->content)
+			free(arg->content);
 		free(arg);
 		arg = tmp;
 	}

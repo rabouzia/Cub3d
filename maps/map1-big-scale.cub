@@ -1,15 +1,15 @@
 NO ./textures/bookshelf.xpm
 SO ./textures/pillar.xpm
 WE ./textures/wall1.xpm
-EA ./textures/bookshelf.xpm
+EA ./textures/wall1.xpm
 
 F 255,0,255
-C 0,255,0
+C 255,255,255
 
 1111111111
 1000000001
-10000000N1
-1001000001
+10000000N1                    
+1000011111                   
 100000000111111111111
 100000000000000000001
 100000000000000000001
