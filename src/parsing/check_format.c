@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 15:50:18 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/11 18:16:20 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/12 16:45:18 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	get_rgb(t_cube *cube, char *line, t_pixel *way)
 
 	(void)cube;
 	color = ft_split(line + 2, ',');
+	if (!color || collumlen(color) > 3)
+		color_err(cube, "too much color", color);
 	if (way->f_or_c)
 		color_err(cube, "same color", color);
 	res = 0;
@@ -60,10 +62,8 @@ int	get_rgb(t_cube *cube, char *line, t_pixel *way)
 	if (rgb == -1)
 		color_err(cube, "wrong color", color);
 	res |= rgb;
-	free_tab(color);
 	way->f_or_c = res;
-	cube->color_count++;
-	return (1);
+	return (free_tab(color),cube->color_count++, 1);
 }
 
 int	read_cub(t_cube *cube)
@@ -76,7 +76,7 @@ int	read_cub(t_cube *cube)
 		ft_end(cube, "Error\nWrong file extension");
 	i = 0;
 	if (!get_lst(cube, cube->av[1]))
-		return (ft_end(cube, "pb in file"),0);
+		return (ft_end(cube, "pb in file"), 0);
 	count_columns(cube);
 	count_row(cube);
 	fill_info(cube);

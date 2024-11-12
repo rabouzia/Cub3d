@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 20:35:28 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/11 15:11:16 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/12 16:19:36 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,16 @@ static int	word_count(char const *s, char c)
 {
 	int	count;
 	int	on_word;
+	int	i;
 
+	i = 0;
 	count = 0;
 	on_word = 0;
 	while (*s)
 	{
 		if (*s == c)
 		{
+			i++;
 			if (on_word)
 			{
 				count++;
@@ -72,6 +75,8 @@ static int	word_count(char const *s, char c)
 			on_word = 1;
 		s++;
 	}
+	if (i != 2)
+		return (0);
 	return (count + on_word);
 }
 
@@ -109,6 +114,8 @@ char	**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	words = word_count(s, c);
+	if (!words)
+		return (NULL);
 	split = malloc((words + 1) * sizeof(char *));
 	if (!split)
 		return (NULL);

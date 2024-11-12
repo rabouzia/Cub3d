@@ -6,31 +6,11 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 15:53:17 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/08 19:04:15 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/12 15:57:40 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
-
-// char	*ft_strdup(char *str)
-// {
-// 	char *res;
-// 	int i;
-
-// 	i = 0;
-// 	if (!str)
-// 		return (NULL);
-// 	while (str[i])
-// 		i++;
-// 	res = malloc(sizeof(char) * (1 + i));
-// 	if (!res)
-// 		return (NULL);
-// 	i = 0;
-// 	while (str[i++])
-// 		res[i] = str[i];
-// 	res[i] = 0;
-// 	return (res);
-// }
 
 char	*ft_strdup(char *src)
 {

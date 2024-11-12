@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 00:19:47 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/11 12:18:53 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/12 16:11:08 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_argaddback(t_arg **head, t_arg *new)
 {
 	if (!head)
-		return ;
+		return;
 	if (*head)
 		ft_arglast(*head)->next = new;
 	else

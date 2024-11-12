@@ -147,6 +147,8 @@ int					get_rgb(t_cube *cube, char *line, t_pixel *way);
 int					get_info(t_cube *cube, char *line);
 
 bool				parsing(t_cube *cube, char **av);
+int					collumlen(char **tab);
+int					tab_size(char **tab);
 
 int					read_cub(t_cube *data);
 
@@ -292,7 +294,7 @@ void				free_tab(char **tab);
 
 void				ft_end(t_cube *cube, char *str);
 
-void				ft_argaddback(t_arg **head, t_arg *new);
+void 					ft_argaddback(t_arg **head, t_arg *new);
 
 t_arg				*ft_argnew(char *str, t_arg_type type);
 
