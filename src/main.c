@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:21:18 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/11 18:21:57 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/14 19:18:24 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ int	main(int ac, char **av)
 	return (0);
 }
 /*
-	- must be close (0 not surround by anything but P or 1)
-	*/
+	- changer les ' ' en 1 dans la map;
+	- split les espace entre les info;
+*/

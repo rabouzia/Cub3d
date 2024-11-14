@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:29:06 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/11 18:22:45 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/14 18:01:57 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,6 @@ int	init_the_player(t_cube *cube)
 	cube->player.plyr_x = cube->map.p_x * TILE_SIZE + TILE_SIZE / 2;
 	cube->player.plyr_y = cube->map.p_y * TILE_SIZE + TILE_SIZE / 2;
 	cube->player.fov_rd = (FOV * M_PI) / 180;
-	cube->player.angle = M_PI;
+	// cube->player.angle = M_PI;
 	return (1);
 }

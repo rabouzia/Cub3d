@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 20:35:28 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/12 16:19:36 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/14 18:07:31 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ bool	is_num(const char *str)
 int	ft_atoi(const char *str)
 {
 	int	i;
-	int	n;
+	long long n;
 	int	c;
 
 	i = 0;
@@ -45,9 +45,10 @@ int	ft_atoi(const char *str)
 	{
 		n = n * 10 + (str[i] - 48);
 		i++;
-	}
-	if (n > 255 || n < 0)
+		if (n > 255 || n < 0)
 		return (-1);
+	}
+	
 	return (n);
 }
 
