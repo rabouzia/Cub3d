@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 20:35:28 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/14 18:07:31 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/15 00:29:07 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,9 @@ int	ft_atoi(const char *str)
 {
 	int	i;
 	long long n;
-	int	c;
 
 	i = 0;
 	n = 0;
-	c = -1;
 	if (!str)
 		return (-1);
 	if (!is_num(str))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calculus.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:37:09 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/11 14:51:45 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/15 00:46:48 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ float	get_vertical_intersection(t_cube *cube, float angl)
 	return (sqrt(pow(v_x - cube->player.plyr_x, 2) + pow(v_y
 				- cube->player.plyr_y, 2)));
 }
+
 
 int	inter_check(float angle, float *inter, float *step, int is_inter)
 {

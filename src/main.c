@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:21:18 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/14 19:18:24 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/15 00:44:38 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ int	main(int ac, char **av)
 	return (0);
 }
 /*
-	- changer les ' ' en 1 dans la map;
-	- split les espace entre les info;
+	// - changer les ' ' en 1 dans la map;
+	// - split les espace entre les info;
 */

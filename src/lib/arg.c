@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arg.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 00:19:47 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/12 16:11:08 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/15 00:43:25 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,34 @@ void	ft_argaddback(t_arg **head, t_arg *new)
 		*head = new;
 }
 
+void epur_space(char *str)
+{
+	int	i; 
+	int j;
+
+	i = 0; 
+	j = 0;
+	while (str[i])
+	{
+		while (str[i] == ' ' || str[i] == '\t')
+			i++;
+		while (str[i])
+		{
+			if (str[i] == ' ' || str[i] == '\t')
+			{
+				str[j++] = ' ';
+				while (str[i] == ' ' || str[i] == '\t')
+					i++;
+			}
+			else
+				str[j++] = str[i++];
+		}
+		if (j > 0 && str[j - 1] == ' ')
+			j--;
+	}
+	str[j] = '\0';
+}
+
 t_arg	*ft_argnew(char *str, t_arg_type type)
 {
 	t_arg	*arg;
@@ -32,6 +60,7 @@ t_arg	*ft_argnew(char *str, t_arg_type type)
 	if (!arg)
 		return (NULL);
 	arg->type = type;
+	epur_space(str);
 	arg->content = ft_strdup(str);
 	arg->next = NULL;
 	return (arg);

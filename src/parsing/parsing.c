@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:29:06 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/14 18:01:57 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/15 00:45:13 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ bool	parsing(t_cube *cube, char **av)
 		return (ft_end(cube, "nice try, map not closed"), 0);
 	if (!letter_check(cube))
 		return (0);
-	init_the_player(cube);
+	if (!init_the_player(cube))
+		return (0);
 	return (1);
 }
 
@@ -117,6 +118,5 @@ int	init_the_player(t_cube *cube)
 	cube->player.plyr_x = cube->map.p_x * TILE_SIZE + TILE_SIZE / 2;
 	cube->player.plyr_y = cube->map.p_y * TILE_SIZE + TILE_SIZE / 2;
 	cube->player.fov_rd = (FOV * M_PI) / 180;
-	// cube->player.angle = M_PI;
 	return (1);
 }

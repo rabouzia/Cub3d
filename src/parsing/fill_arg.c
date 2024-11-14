@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_arg.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 20:37:54 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/12 16:45:33 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/15 00:28:51 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,6 @@ void	count_columns(t_cube *cube)
 		column = ft_strlen(lst->content);
 		if (cube->map.columns < column && lst->type == MAP)
 			cube->map.columns = column;
-		lst = lst->next;
-	}
-}
-
-void	count_row(t_cube *cube)
-{
-	int		i;
-	t_arg	*lst;
-
-	lst = cube->arg;
-	i = 0;
-	while (lst)
-	{
-		if (lst->type == MAP)
-			i++;
 		lst = lst->next;
 	}
 	cube->map.rows = cube->map.columns;
@@ -68,6 +53,25 @@ int	get_lst(t_cube *cube, char *file)
 	return (1);
 }
 
+void replace(char **tab)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (tab[i])
+	{
+		j = 0;
+		while (tab[i][j])
+		{
+			if (tab[i][j] == ' ')
+				tab[i][j] = '1';
+			j++;
+		}
+		i++;
+	}
+}
+
 int	fill_map(t_cube *cube)
 {
 	t_arg	*lst;
@@ -86,6 +90,7 @@ int	fill_map(t_cube *cube)
 		}
 		lst = lst->next;
 	}
+	replace(cube->map.tab_map);
 	return (1);
 }
 
