@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:33:54 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/11 12:21:28 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/15 01:03:53 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,24 @@ void	draw_floor_ceiling(t_cube *cube, int ray, int top_pix, int bottom_pix)
 		ft_mlx_pixel_put(cube, ray, i++, cube->texture_way[4].f_or_c); // sky
 }
 
-int	get_color(t_cube *cube, int flag)
-{
-	cube->ray.ray_ngl = nor_angle(cube->ray.ray_ngl);
-	if (flag == 0)
-	{
-		if (cube->ray.ray_ngl > M_PI / 2 && cube->ray.ray_ngl < 3 * (M_PI / 2))
-			return (KAKI_PIXEL);
-		else
-			return (KAKI_PIXEL);
-	}
-	else
-	{
-		if (cube->ray.ray_ngl > 0 && cube->ray.ray_ngl < M_PI)
-			return (RED_PIXEL);
-		else
-			return (GREY_PIXEL);
-	}
-}
+// int	get_color(t_cube *cube, int flag)
+// {
+// 	cube->ray.ray_ngl = nor_angle(cube->ray.ray_ngl);
+// 	if (flag == 0)
+// 	{
+// 		if (cube->ray.ray_ngl > M_PI / 2 && cube->ray.ray_ngl < 3 * (M_PI / 2))
+// 			return (KAKI_PIXEL);
+// 		else
+// 			return (KAKI_PIXEL);
+// 	}
+// 	else
+// 	{
+// 		if (cube->ray.ray_ngl > 0 && cube->ray.ray_ngl < M_PI)
+// 			return (RED_PIXEL);
+// 		else
+// 			return (GREY_PIXEL);
+// 	}
+// }
 
 double	get_x_o(t_pixel *texture, t_cube *cube)
 {
