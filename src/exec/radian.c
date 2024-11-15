@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   radian.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:14:34 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/15 10:47:04 by ramzerk          ###   ########.fr       */
+/*   Updated: 2024/11/15 15:44:34 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,10 @@ void	move_player(t_cube *cube, double angle)
 	new_y = (cube->player.plyr_y + sin(angle));
 	map_grid_x = ((int)new_x / TILE_SIZE);
 	map_grid_y = ((int)new_y / TILE_SIZE);
-	if ((cube->map.tab_map[map_grid_y][map_grid_x] != '1'
-			&& (cube->map.tab_map[map_grid_y][(int)cube->player.plyr_x
-				/ TILE_SIZE] != '1'
-				&& cube->map.tab_map[(int)cube->player.plyr_y
-				/ TILE_SIZE][map_grid_x] != '1'))
-		|| (cube->map.tab_map[map_grid_y][map_grid_x] != '1'
-			&& (cube->map.tab_map[map_grid_y][(int)cube->player.plyr_x
-				/ TILE_SIZE] != '1'
-				&& cube->map.tab_map[(int)cube->player.plyr_y
-				/ TILE_SIZE][map_grid_x] != '1')))
+	if (cube->map.tab_map[map_grid_y][map_grid_x] != '1'
+		&& (cube->map.tab_map[map_grid_y][(int)cube->player.plyr_x
+			/ TILE_SIZE] != '1' || cube->map.tab_map[(int)cube->player.plyr_y
+			/ TILE_SIZE][map_grid_x] != '1'))
 	{
 		cube->player.plyr_x = new_x;
 		cube->player.plyr_y = new_y;

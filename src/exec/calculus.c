@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calculus.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:37:09 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/15 11:06:52 by ramzerk          ###   ########.fr       */
+/*   Updated: 2024/11/15 15:49:24 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,14 @@ float	get_horizontal_intersection(t_cube *cube, float angl)
 	float	x_step;
 	float	y_step;
 	int		pixel;
-	int is_upper_half;
 
-	is_upper_half = unit_circle(angl, 'y');
 	y_step = TILE_SIZE;
 	x_step = TILE_SIZE / tan(angl);
 	h_y = floor(cube->player.plyr_y / TILE_SIZE) * TILE_SIZE;
 	pixel = inter_check(angl, &h_y, &y_step, 1);
 	h_x = cube->player.plyr_x + (h_y - cube->player.plyr_y) / tan(angl);
-	if ((is_upper_half && x_step > 0) || (!is_upper_half && x_step < 0))
+	if ((unit_circle(angl, 'y') && x_step > 0) || (!unit_circle(angl, 'y')
+			&& x_step < 0))
 		x_step *= -1;
 	while (wall_hit(h_x, h_y - pixel, cube))
 	{
@@ -90,7 +89,6 @@ float	get_vertical_intersection(t_cube *cube, float angl)
 	return (sqrt(pow(v_x - cube->player.plyr_x, 2) + pow(v_y
 				- cube->player.plyr_y, 2)));
 }
-
 
 int	inter_check(float angle, float *inter, float *step, int is_inter)
 {

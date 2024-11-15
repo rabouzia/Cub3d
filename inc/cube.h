@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cube.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/15 15:35:41 by rabouzia          #+#    #+#             */
+/*   Updated: 2024/11/15 15:46:37 by rabouzia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUBE_H
 # define CUBE_H
 
@@ -290,11 +302,13 @@ void				quit_esc(t_cube *d);
 
 void				free_tab(char **tab);
 
+void				epur_space(char *str);
+
 //############ lst arg #######################
 
 void				ft_end(t_cube *cube, char *str);
 
-void 					ft_argaddback(t_arg **head, t_arg *new);
+void				ft_argaddback(t_arg **head, t_arg *new);
 
 t_arg				*ft_argnew(char *str, t_arg_type type);
 
@@ -303,5 +317,7 @@ t_arg				*ft_arglast(t_arg *head);
 int					ft_argmap(t_arg *arg);
 
 void				ft_argclear(t_arg *arg);
+
+int					reverse_bytes(int c);
 
 #endif

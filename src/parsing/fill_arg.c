@@ -3,31 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   fill_arg.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cyaid <cyaid@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 20:37:54 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/15 14:57:53 by cyaid            ###   ########.fr       */
+/*   Updated: 2024/11/15 15:39:44 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
-
-void	count_columns(t_cube *cube)
-{
-	int		column;
-	t_arg	*lst;
-
-	lst = cube->arg;
-	column = 0;
-	while (lst)
-	{
-		column = ft_strlen(lst->content);
-		if (cube->map.columns < column && lst->type == MAP)
-			cube->map.columns = column;
-		lst = lst->next;
-	}
-	cube->map.rows = cube->map.columns;
-}
 
 int	get_lst(t_cube *cube, char *file)
 {
@@ -53,7 +36,7 @@ int	get_lst(t_cube *cube, char *file)
 	return (1);
 }
 
-void replace(char **tab)
+void	replace(char **tab)
 {
 	int	i;
 	int	j;
@@ -106,6 +89,7 @@ void	fill_info(t_cube *cube)
 		lst = lst->next;
 	}
 }
+
 int	flag_line(char *str)
 {
 	char	c;

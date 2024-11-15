@@ -6,13 +6,12 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 10:34:44 by ramzerk           #+#    #+#             */
-/*   Updated: 2024/11/15 15:34:24 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/15 15:46:28 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 #include <math.h>
-
 
 int	quit_click(t_cube *cube)
 {
@@ -56,4 +55,20 @@ void	cast(t_cube *cube)
 		ray++;
 		cube->ray.ray_ngl += (cube->player.fov_rd / SCREEN_WIDTH);
 	}
+}
+
+int	game_loop(t_cube *cube)
+{
+	cast(cube);
+	mlx_put_image_to_window(cube->mlx, cube->win, cube->image.img, 0, 0);
+	inputs(cube);
+	return (0);
+}
+
+int	reverse_bytes(int c)
+{
+	unsigned int	b;
+
+	b = c;
+	return (b);
 }

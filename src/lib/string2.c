@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 20:35:28 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/15 00:29:07 by ramzerk          ###   ########.fr       */
+/*   Updated: 2024/11/15 15:40:42 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ bool	is_num(const char *str)
 
 int	ft_atoi(const char *str)
 {
-	int	i;
-	long long n;
+	int			i;
+	long long	n;
 
 	i = 0;
 	n = 0;
@@ -44,9 +44,8 @@ int	ft_atoi(const char *str)
 		n = n * 10 + (str[i] - 48);
 		i++;
 		if (n > 255 || n < 0)
-		return (-1);
+			return (-1);
 	}
-	
 	return (n);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_portable.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 15:53:17 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/15 00:24:53 by ramzerk          ###   ########.fr       */
+/*   Updated: 2024/11/15 15:43:15 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,16 +78,6 @@ int	ft_strlcpy(char *dest, char *src, int len)
 	return (x);
 }
 
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
 char	*ft_strjoin(char *s1, char *s2)
 {
 	int		n1;
@@ -126,18 +116,4 @@ void	*ft_calloc(size_t n, size_t s)
 		i++;
 	}
 	return ((void *)str);
-}
-
-void	ft_putstr_fd(char *s, int fd)
-{
-	int	i;
-
-	if (!s)
-		return ;
-	i = 0;
-	while (s[i])
-	{
-		write(fd, &s[i], 1);
-		i++;
-	}
 }

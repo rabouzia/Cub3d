@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_format.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cyaid <cyaid@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 15:50:18 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/15 15:02:22 by cyaid            ###   ########.fr       */
+/*   Updated: 2024/11/15 15:50:33 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	get_path(t_cube *cube, char *line, t_pixel *p)
 {
 	if (p->img)
 		ft_end(cube, "same .xpm");
-	printf("%s\n", line);
 	p->img = mlx_xpm_file_to_image(cube->mlx, line + 5, &p->pix_w, &p->pix_h);
 	if (!p->img)
 		ft_end(cube, "xpm to img error");
@@ -59,7 +58,7 @@ int	get_rgb(t_cube *cube, char *line, t_pixel *way)
 		color_err(cube, "wrong color", color);
 	res |= rgb;
 	way->f_or_c = res;
-	return (free_tab(color),cube->color_count++, 1);
+	return (free_tab(color), cube->color_count++, 1);
 }
 
 int	read_cub(t_cube *cube)

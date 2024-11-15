@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cyaid <cyaid@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:29:06 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/15 14:45:49 by cyaid            ###   ########.fr       */
+/*   Updated: 2024/11/15 15:50:06 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,33 +21,9 @@ bool	parsing(t_cube *cube, char **av)
 		return (ft_end(cube, "nice try, map not closed"), 0);
 	if (!letter_check(cube))
 		return (0);
-	printarg(cube->arg);
 	if (!init_the_player(cube))
 		return (0);
 	return (1);
-}
-
-int	tab_size(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		ft_strlen(tab[i]);
-		i++;
-	}
-	return (i);
-}
-
-int	collumlen(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-		i++;
-	return (i);
 }
 
 bool	is_in_charset(char c, char *set)
@@ -105,13 +81,6 @@ bool	flood_fill(char **map)
 		y++;
 	}
 	return (true);
-}
-int	game_loop(t_cube *cube)
-{
-	cast(cube);
-	mlx_put_image_to_window(cube->mlx, cube->win, cube->image.img, 0, 0);
-	inputs(cube);
-	return (0);
 }
 
 int	init_the_player(t_cube *cube)
