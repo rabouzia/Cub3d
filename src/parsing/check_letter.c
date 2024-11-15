@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 15:46:19 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/14 18:02:31 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/15 16:12:44 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ int	is_good(char c)
 	if (c == '1')
 		return (1);
 	if (c == '0')
-		return (1);
-	if (c == 'D')
 		return (1);
 	if (c == 'S')
 		return (1);
