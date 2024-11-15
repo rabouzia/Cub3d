@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   radian.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:14:34 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/11 12:19:52 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/15 10:47:04 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
+
+/*
+	To handle large angles
+	We check if the angle is greater than 2 * PI
+	If it's greater than 2 * PI, we subtract 2 * PI from it
+	We check if the angle is less than 0
+	If it's less than 0, we add 2 * PI to it
+*/
 
 double	wrap_angle(double angle)
 {
@@ -26,6 +34,12 @@ void	rotate_player(t_cube *cube, int i)
 	cube->player.angle += ROTATION_SPEED * i;
 	cube->player.angle = wrap_angle(cube->player.angle);
 }
+
+/*
+	We calculate the new position of the player
+	We check if the new position is not a wall
+	If it's not a wall, we update the position of the player
+*/
 
 void	move_player(t_cube *cube, double angle)
 {
@@ -54,6 +68,14 @@ void	move_player(t_cube *cube, double angle)
 	}
 }
 
+/*
+	To handle negative angles
+	Normalize the angle between 0 and 2 * PI
+	If the angle is negative, we add 2 * PI to it
+	If the angle is greater than 2 * PI, we subtract 2 * PI from it
+	So we get the angle between 0 and 2 * PI
+*/
+
 float	nor_angle(float angle)
 {
 	if (angle < 0)
@@ -62,6 +84,10 @@ float	nor_angle(float angle)
 		angle -= (2 * M_PI);
 	return (angle);
 }
+
+/*
+	We check if x or y is in the unit circle
+*/
 
 int	unit_circle(float angle, char c)
 {

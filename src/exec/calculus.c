@@ -6,11 +6,17 @@
 /*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:37:09 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/15 00:46:48 by ramzerk          ###   ########.fr       */
+/*   Updated: 2024/11/15 11:06:52 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
+
+/*
+	We check if the player is out of the map
+	We check if the player hit a wall
+	floor -> arrondir à l'entier inférieur
+*/
 
 int	wall_hit(float x, float y, t_cube *cube)
 {
@@ -37,14 +43,15 @@ float	get_horizontal_intersection(t_cube *cube, float angl)
 	float	x_step;
 	float	y_step;
 	int		pixel;
+	int is_upper_half;
 
+	is_upper_half = unit_circle(angl, 'y');
 	y_step = TILE_SIZE;
 	x_step = TILE_SIZE / tan(angl);
 	h_y = floor(cube->player.plyr_y / TILE_SIZE) * TILE_SIZE;
 	pixel = inter_check(angl, &h_y, &y_step, 1);
 	h_x = cube->player.plyr_x + (h_y - cube->player.plyr_y) / tan(angl);
-	if ((unit_circle(angl, 'y') && x_step > 0) || (!unit_circle(angl, 'y')
-			&& x_step < 0))
+	if ((is_upper_half && x_step > 0) || (!is_upper_half && x_step < 0))
 		x_step *= -1;
 	while (wall_hit(h_x, h_y - pixel, cube))
 	{
