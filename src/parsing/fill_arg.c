@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 20:37:54 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/15 15:39:44 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/11/15 16:44:48 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,21 @@ int	fill_map(t_cube *cube)
 void	fill_info(t_cube *cube)
 {
 	t_arg	*lst;
+	int		i;
 
+	i = 0;
 	lst = cube->arg;
 	while (lst)
 	{
 		if (lst->type == INFO)
+		{
 			get_info(cube, lst->content);
+			i++;
+		}
 		lst = lst->next;
 	}
+	if (i != 6)
+		ft_end(cube, "Too many or too few info");
 }
 
 int	flag_line(char *str)
