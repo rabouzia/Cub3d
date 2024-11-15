@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_format.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cyaid <cyaid@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 15:50:18 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/15 00:28:09 by ramzerk          ###   ########.fr       */
+/*   Updated: 2024/11/15 15:02:22 by cyaid            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	get_path(t_cube *cube, char *line, t_pixel *p)
 {
 	if (p->img)
 		ft_end(cube, "same .xpm");
+	printf("%s\n", line);
 	p->img = mlx_xpm_file_to_image(cube->mlx, line + 5, &p->pix_w, &p->pix_h);
 	if (!p->img)
 		ft_end(cube, "xpm to img error");

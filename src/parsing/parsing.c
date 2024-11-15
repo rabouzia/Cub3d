@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cyaid <cyaid@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 20:29:06 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/15 00:45:13 by ramzerk          ###   ########.fr       */
+/*   Updated: 2024/11/15 14:45:49 by cyaid            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ bool	parsing(t_cube *cube, char **av)
 		return (ft_end(cube, "nice try, map not closed"), 0);
 	if (!letter_check(cube))
 		return (0);
+	printarg(cube->arg);
 	if (!init_the_player(cube))
 		return (0);
 	return (1);

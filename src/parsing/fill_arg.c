@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_arg.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cyaid <cyaid@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 20:37:54 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/15 00:28:51 by ramzerk          ###   ########.fr       */
+/*   Updated: 2024/11/15 14:57:53 by cyaid            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	flag_line(char *str)
 	char	c;
 
 	c = str[1];
-	if (str[0] == '\0')
+	if (str[0] == '\0' || str[0] == '\t')
 		return (SPACE);
 	if (str[0] == '1' && (c == '1' || c == '0' || c == ' ' || c == 'N'))
 		return (MAP);

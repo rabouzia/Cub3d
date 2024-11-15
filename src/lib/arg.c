@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arg.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cyaid <cyaid@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 00:19:47 by rabouzia          #+#    #+#             */
-/*   Updated: 2024/11/15 00:43:25 by ramzerk          ###   ########.fr       */
+/*   Updated: 2024/11/15 15:01:46 by cyaid            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ t_arg	*ft_argnew(char *str, t_arg_type type)
 	if (!arg)
 		return (NULL);
 	arg->type = type;
-	epur_space(str);
+	if(arg->type != MAP)
+		epur_space(str);
 	arg->content = ft_strdup(str);
 	arg->next = NULL;
 	return (arg);
