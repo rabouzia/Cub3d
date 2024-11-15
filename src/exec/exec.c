@@ -3,18 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 10:34:44 by ramzerk           #+#    #+#             */
-/*   Updated: 2024/11/15 00:17:56 by ramzerk          ###   ########.fr       */
+/*   Updated: 2024/11/15 15:34:24 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 #include <math.h>
 
+
+int	quit_click(t_cube *cube)
+{
+	ft_end(cube, "Red cross clicked");
+	return (0);
+}
+
 int	raycasting(t_cube *cube)
 {
+	mlx_hook(cube->win, 17, 0, &quit_click, cube);
 	mlx_hook(cube->win, 2, 1l << 0, &key_press, cube);
 	mlx_hook(cube->win, 3, 1l << 1, &key_release, cube);
 	mlx_loop_hook(cube->mlx, &game_loop, cube);
